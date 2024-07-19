@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
-
 import 'package:deliveryboy_multivendor/Helper/Session.dart';
 import 'package:deliveryboy_multivendor/Helper/app_btn.dart';
 import 'package:deliveryboy_multivendor/Helper/color.dart';
@@ -13,7 +12,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:http/http.dart';
 import 'package:url_launcher/url_launcher.dart';
-
 import '../livetracking.dart';
 
 
@@ -45,9 +43,9 @@ class StateOrder extends State<OrderDetail> with TickerProviderStateMixin {
     PROCESSED,
     SHIPED,
     DELIVERD,
-    CANCLED,
-    RETURNED,
-    WAITING
+    // CANCLED,
+    // RETURNED,
+    // WAITING
   ];
   bool? _isCancleable, _isReturnable, _isLoading = true;
   bool _isProgress = false;
@@ -556,7 +554,7 @@ class StateOrder extends State<OrderDetail> with TickerProviderStateMixin {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text("$TAXPER (${widget.model!.taxPer!}) :",
+                    Text("$TAXPER :",
                         style: Theme.of(context)
                             .textTheme
                             .button!
