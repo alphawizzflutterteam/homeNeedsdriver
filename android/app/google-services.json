@@ -1,13 +1,32 @@
 {
   "project_info": {
-    "project_number": "194075267615",
-    "project_id": "farmbuz-bf128",
-    "storage_bucket": "farmbuz-bf128.appspot.com"
+    "project_number": "794984587696",
+    "project_id": "homeneeds-198c0",
+    "storage_bucket": "homeneeds-198c0.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:194075267615:android:9d84430828d595f1dbfb2a",
+        "mobilesdk_app_id": "1:794984587696:android:35518c0f5007216742b675",
+        "android_client_info": {
+          "package_name": "com.homeneed.user"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAaxrgOjG4f5G0VljlQneXqU0TR4af-Ezs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:794984587696:android:305bb2d0d2544b2e42b675",
         "android_client_info": {
           "package_name": "com.homeneeds.driver"
         }
@@ -15,7 +34,26 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyCXPpXkc5YqbaaZ_Js76UhJdCYvNLUujos"
+          "current_key": "AIzaSyAaxrgOjG4f5G0VljlQneXqU0TR4af-Ezs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:794984587696:android:c266e9127e64c8e642b675",
+        "android_client_info": {
+          "package_name": "com.homeneeds.seller"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAaxrgOjG4f5G0VljlQneXqU0TR4af-Ezs"
         }
       ],
       "services": {

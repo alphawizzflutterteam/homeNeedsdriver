@@ -1,6 +1,7 @@
 final String appName = 'HomeNeeds Driver';
 
-final String baseUrl = 'https://developmentalphawizz.com/home_needs/delivery_boy/app/v1/api/';
+// final String baseUrl = 'https://developmentalphawizz.com/home_needs/delivery_boy/app/v1/api/';
+final String baseUrl = 'https://homeneedsyourplace.in/delivery_boy/app/v1/api/';
 
 final int timeOut = 50;
 const int perPage = 10;
@@ -39,7 +40,7 @@ const String CON_PASS_NOT_MATCH_MSG = "Confirm Password not match";
 const String CONFIRMPASSHINT_LBL = 'Confirm Password';
 const String ADD_NAME_LBL = "Add Name";
 const String LOGOUTTXT = 'Are you sure you want to logout?';
-const String OTP_LBL='OTP Confirm';
+const String OTP_LBL = 'OTP Confirm';
 const String LOGOUTYES = 'Yes';
 const String LOGOUTNO = 'No';
 const String WALLET = 'Wallet History';
@@ -80,13 +81,13 @@ const String BONUS_LBL = 'Bonus';
 const String CURBAL_LBL = 'Current Balance';
 const String WITHDRAW_MONEY = 'Withdraw Balance';
 const String SEND_REQUEST = 'Send Withdrawal Request';
-const String OTP_ENTER='Enter OTP';
+const String OTP_ENTER = 'Enter OTP';
 const String WITHDRWAL_AMT = 'Withdrawal Amount';
 const String BANK_DETAIL = 'Bank Details:\n' +
     'Account No :123XXXXX\n' +
     'IFSC Code: 123XXX \n' +
     'Name: Abc xyz';
-const String FIELD_REQUIRED='This Field is Required';
+const String FIELD_REQUIRED = 'This Field is Required';
 const String SEND_VERIFY_CODE_LBL =
     "We will send a Verification Code to This Number";
 const String SENT_VERIFY_CODE_TO_NO_LBL = "We have sent a verification code to";
@@ -99,12 +100,12 @@ const String OTPERROR = 'Error validating OTP, try again';
 const String ENTEROTP = 'Please Enter OTP!';
 const String CREATE_ACC_LBL = "Create an account";
 const String FILTER_BY = "Filter By";
-const String SHOW_TRANS='Show Wallet Transactions';
-const String SHOW_REQ='Show Wallet Requests';
-const String PENDING='Pending';
-const String ACCEPTED='Accepted';
-const String REJECTED='Rejected';
-const String PREFER_DATE_TIME='Preferred Delivery Date/Time';
+const String SHOW_TRANS = 'Show Wallet Transactions';
+const String SHOW_REQ = 'Show Wallet Requests';
+const String PENDING = 'Pending';
+const String ACCEPTED = 'Accepted';
+const String REJECTED = 'Rejected';
+const String PREFER_DATE_TIME = 'Preferred Delivery Date/Time';
 const String PWD_REQUIRED = 'Password is Required';
 const String PWD_LENGTH = 'password should be more then 6 char long';
 const String USER_REQUIRED = 'Username is Required';
@@ -119,6 +120,5 @@ const String TRY_AGAIN_INT_LBL = "Try Again";
 final String somethingMSg =
     'Something went wrong. Please try again after some time';
 const String noNoti = 'No Notification Found..!!';
-
 
 final String jwtKey = "e1e421dceee9ea718ab764ea4fdef95629e7f415";
