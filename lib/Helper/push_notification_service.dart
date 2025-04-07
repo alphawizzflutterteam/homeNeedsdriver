@@ -32,15 +32,15 @@ class PushNotificationService {
 
     const AndroidInitializationSettings initializationSettingsAndroid =
     AndroidInitializationSettings('ic_launcher');
-    final IOSInitializationSettings initializationSettingsIOS =
+    /*final IOSInitializationSettings initializationSettingsIOS =
     IOSInitializationSettings();
     final MacOSInitializationSettings initializationSettingsMacOS =
-    MacOSInitializationSettings();
+    MacOSInitializationSettings();*/
     final InitializationSettings initializationSettings =
     InitializationSettings(
         android: initializationSettingsAndroid,
-        iOS: initializationSettingsIOS,
-        macOS: initializationSettingsMacOS);
+       /* iOS: initializationSettingsIOS,
+        macOS: initializationSettingsMacOS*/);
 
     flutterLocalNotificationsPlugin.initialize(initializationSettings);
 
