@@ -111,7 +111,7 @@ class StatePrivacy extends State<PrivacyPolicy> with TickerProviderStateMixin {
     body: SingleChildScrollView(
     child: Html(
     data: privacy,
-    ))
+    ) )
     )
             : Scaffold(
                 key: _scaffoldKey,

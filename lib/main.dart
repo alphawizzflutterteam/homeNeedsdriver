@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'Helper/color.dart';
 import 'Helper/constant.dart';
+import 'Helper/notification_service.dart';
 import 'Helper/push_notification_service.dart';
 import 'Screens/Splash/splash.dart';
 
@@ -17,9 +18,17 @@ void main() async {
     statusBarColor: Colors.transparent, // status bar color
     systemNavigationBarColor: Colors.transparent,
   ));
-  final pushNotificationService = PushNotificationService();
-  pushNotificationService.initialise();
+  /*final pushNotificationService = PushNotificationService();
+  pushNotificationService.initialise();*/
+  LocalNotificationService.initialize();
+
   FirebaseMessaging.onBackgroundMessage(myForgroundMessageHandler);
+  FirebaseMessaging.instance.getToken().then((value) {
+    String  fcmToken = value!;
+
+
+    print("fcm is ${fcmToken}");
+  });
   runApp(MyApp());
 }
 Future<void> _requestLocationPermission() async {

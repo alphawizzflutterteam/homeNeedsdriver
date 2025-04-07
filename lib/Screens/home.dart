@@ -11,6 +11,7 @@ import 'package:deliveryboy_multivendor/Helper/string.dart';
 import 'package:deliveryboy_multivendor/Model/GetBoUpdateModel.dart';
 import 'package:deliveryboy_multivendor/Model/order_model.dart';
 import 'package:deliveryboy_multivendor/Screens/Authentication/login.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
@@ -72,6 +73,7 @@ class StateHome extends State<Home> with TickerProviderStateMixin {
     getOrder();
     getUserDetail();
     _startTimer();
+    init() ;
 
     final pushNotificationService = PushNotificationService(context: context);
     pushNotificationService.initialise();
@@ -660,6 +662,65 @@ class StateHome extends State<Home> with TickerProviderStateMixin {
     return null;
   }
 
+  Future<Null> acceptRejectOrder(String status ) async {
+    _isNetworkAvail = await isNetworkAvailable();
+    if (_isNetworkAvail) {
+      try {
+        CUR_USERID = await getPrefrence(ID);
+        CUR_USERNAME = await getPrefrence(USERNAME);
+
+        var parameter = {
+          USER_ID: CUR_USERID,
+          'status': perPage.toString(),
+        };
+
+
+        Response response = await post(getOrdersApi, body: parameter, headers: headers).timeout(Duration(seconds: timeOut));
+
+        var getdata = json.decode(response.body);
+        bool error = getdata["error"];
+        String? msg = getdata["message"];
+        total = int.parse(getdata["total"]);
+
+        if (!error) {
+          if (offset! < total!) {
+            tempList.clear();
+            var data = getdata["data"];
+
+            tempList = (data as List)
+                .map((data) => Order_Model.fromJson(data))
+                .toList();
+
+            orderList.addAll(tempList);
+
+            offset = offset! + perPage;
+          }
+        }
+        if (mounted)
+          setState(() {
+            _isLoading = false;
+            isLoadingItems = false;
+          });
+      } on TimeoutException catch (_) {
+        setSnackbar(somethingMSg);
+        setState(() {
+          _isLoading = false;
+          isLoadingItems = false;
+        });
+      }
+    } else {
+      if (mounted)
+        setState(() {
+          _isNetworkAvail = false;
+          _isLoading = false;
+          isLoadingItems = false;
+        });
+    }
+
+    return null;
+  }
+
+
   setSnackbar(String msg) {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       content: Text(
@@ -798,7 +859,60 @@ class StateHome extends State<Home> with TickerProviderStateMixin {
                     Text(" Order on: ${model.orderDate!}"),
                   ],
                 ),
-              )
+              ),
+
+              // Padding(
+              //   padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 5),
+              //   child: Row(
+              //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //     children: [
+              //     InkWell(
+              //       onTap: (){
+              //         acceptRejectOrder('status');
+              //       },
+              //       child: Container(
+              //         padding:
+              //         const EdgeInsets.all(5),
+              //         width: 120,
+              //         decoration:
+              //         BoxDecoration(
+              //             borderRadius:
+              //             BorderRadius
+              //                 .circular(
+              //                 20),
+              //             color: Colors.green),
+              //         child: Center(
+              //           child: Text(
+              //               "Accept", //'Accept',
+              //               style: const TextStyle(
+              //                   color: Colors
+              //                       .white)),
+              //         ),
+              //       ),
+              //     ),
+              //     InkWell(
+              //       onTap: (){
+              //         acceptRejectOrder('status');
+              //       },
+              //       child: Container(
+              //         padding: const EdgeInsets.all(5),
+              //         width: 120,
+              //         decoration:
+              //         BoxDecoration(
+              //             borderRadius:
+              //             BorderRadius
+              //                 .circular(
+              //                 20),
+              //             color: Colors.red),
+              //         child: Center(
+              //           child: Text(
+              //               "Reject", //'Accept',
+              //               style: const TextStyle(color: Colors.white)),
+              //         ),
+              //       ),
+              //     )
+              //   ],),
+              // )
             ])),
         onTap: () async {
           await Navigator.push(
@@ -816,6 +930,14 @@ orderList.clear();*/
           // getOrder();
         },
       ),
+    );
+  }
+
+ void init() async{
+   FirebaseMessaging.onMessage.listen(
+          (message) {
+       getOrder();
+      },
     );
   }
 
@@ -994,6 +1116,7 @@ orderList.clear();*/
           }),
     );
   }
+
   Future<GetBoUpdateModel?> getupdateboy(id) async {
     var header = headers;
     var request = http.MultipartRequest(
@@ -1012,8 +1135,8 @@ orderList.clear();*/
       return null;
     }
   }
-  CollectionReference humanCollection =
-  FirebaseFirestore.instance.collection("driverlocation");
+
+  CollectionReference humanCollection = FirebaseFirestore.instance.collection("driverlocation");
 
   Future<void> updateDriverLocation() async {
     print("location store function Start===========");
@@ -1058,10 +1181,47 @@ orderList.clear();*/
   void _startTimer() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     CUR_USERID = await getPrefrence(ID);
-    _timer = Timer.periodic(Duration(seconds: 5), (timer) async {
+    _timer = Timer.periodic(Duration(minutes: 2), (timer) async {
       await getUserCurrentLocation();
     });
   }
+
+
+  // updateCurrentLocation() {
+  //   positionStream = Geolocator.getPositionStream(
+  //     locationSettings: const LocationSettings(
+  //       accuracy: LocationAccuracy.high,
+  //       distanceFilter:
+  //       1000, // Minimum change in distance (in meters) before update
+  //     ),
+  //   ).listen((Position position) async {
+  //     // Handle location update
+  //     double latitude = position.latitude;
+  //     double longitude = position.longitude;
+  //     // Your method to update the driver location
+  //     updateDriverLocation(
+  //       userId.toString(),
+  //       latitude,
+  //       longitude,
+  //     );
+  //   });
+  // }
+  //
+  // // @pragma('vm:entry-point')
+  // // Future<bool> onIosBackground(ServiceInstance service) async {
+  // //   log("----- error log --- ",error: "ngnkdfnkgkdf");
+  // //
+  // //   updateCurrentLocation();
+  // //   return true;
+  // // }
+  // //
+  // // @pragma('vm:entry-point')
+  // // void onStart(ServiceInstance service) async {
+  // //   updateCurrentLocation();
+  // // }
+  //
+  // StreamSubscription<Position>? positionStream;
+  // final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
 
 }
