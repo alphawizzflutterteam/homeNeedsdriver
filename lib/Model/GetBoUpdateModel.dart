@@ -1,22 +1,27 @@
 import 'dart:convert';
+
 /// error : false
 /// message : "Data retrived successfully"
 /// data : [{"id":"153","ip_address":"49.36.16.205","username":"Rahul  Sharma","email":"a@gmail.com","mobile":"9755186862","image":null,"gender":"male","balance":"570","activation_selector":"a29a91b4266543b32f2d","activation_code":"$2y$10$EIVRSvrd7wDDv5CBTiC.Q.luFr.pz9l1ubPoAsyX/DZZvkq8sSJUm","forgotten_password_selector":null,"forgotten_password_code":null,"forgotten_password_time":null,"remember_selector":null,"remember_code":null,"created_on":"1648218075","last_login":"1648272756","active":"1","company":null,"address":"ddfds","bonus":"2","cash_received":"0.00","dob":"1998-03-14","country_code":null,"city":null,"area":null,"street":null,"license":"uploads/media/2022/sand.jpg","vehicle":"Mp 44 mc 3223","pincode":null,"serviceable_zipcodes":"9","apikey":null,"referral_code":null,"friends_code":null,"fcm_id":"f31YocDUQ-i69KeexwX71f:APA91bH5Xk-XZt4BpJ8IRo2ltBeHIRbJUj7Tjjsta-2FWPpWy0Aq0DJ1jBI87Vn4P5i3zTYizMeUNNvA2sPLo_WY99vYh7ZtLQPVNBdgO4ptYEBdPcDqu_InLYgVSfh2pX8Vji8KQMDY","latitude":null,"longitude":null,"open_close_status":"0","created_at":"2022-03-25 19:51:15","gst_file":"","food_lic":"","account_name":"dfddfd","pro_pic":"","account_number":"333333333333444444","bank_code":"uploads/media/2022/sand.jpg","bank_name":"uploads/media/2022/sand.jpg"}]
 /// img_path : "https://alphawizztest.tk/ZuqZuq/"
 
-GetBoUpdateModel getBoUpdateModelFromJson(String str) => GetBoUpdateModel.fromJson(json.decode(str));
-String getBoUpdateModelToJson(GetBoUpdateModel data) => json.encode(data.toJson());
+GetBoUpdateModel getBoUpdateModelFromJson(String str) =>
+    GetBoUpdateModel.fromJson(json.decode(str));
+String getBoUpdateModelToJson(GetBoUpdateModel data) =>
+    json.encode(data.toJson());
+
 class GetBoUpdateModel {
   GetBoUpdateModel({
-      bool? error, 
-      String? message, 
-      List<Data>? data, 
-      String? imgPath,}){
+    bool? error,
+    String? message,
+    List<Data>? data,
+    String? imgPath,
+  }) {
     _error = error;
     _message = message;
     _data = data;
     _imgPath = imgPath;
-}
+  }
 
   GetBoUpdateModel.fromJson(dynamic json) {
     _error = json['error'];
@@ -33,15 +38,18 @@ class GetBoUpdateModel {
   String? _message;
   List<Data>? _data;
   String? _imgPath;
-GetBoUpdateModel copyWith({  bool? error,
-  String? message,
-  List<Data>? data,
-  String? imgPath,
-}) => GetBoUpdateModel(  error: error ?? _error,
-  message: message ?? _message,
-  data: data ?? _data,
-  imgPath: imgPath ?? _imgPath,
-);
+  GetBoUpdateModel copyWith({
+    bool? error,
+    String? message,
+    List<Data>? data,
+    String? imgPath,
+  }) =>
+      GetBoUpdateModel(
+        error: error ?? _error,
+        message: message ?? _message,
+        data: data ?? _data,
+        imgPath: imgPath ?? _imgPath,
+      );
   bool? get error => _error;
   String? get message => _message;
   List<Data>? get data => _data;
@@ -57,106 +65,72 @@ GetBoUpdateModel copyWith({  bool? error,
     map['img_path'] = _imgPath;
     return map;
   }
-
 }
-
-/// id : "153"
-/// ip_address : "49.36.16.205"
-/// username : "Rahul  Sharma"
-/// email : "a@gmail.com"
-/// mobile : "9755186862"
-/// image : null
-/// gender : "male"
-/// balance : "570"
-/// activation_selector : "a29a91b4266543b32f2d"
-/// activation_code : "$2y$10$EIVRSvrd7wDDv5CBTiC.Q.luFr.pz9l1ubPoAsyX/DZZvkq8sSJUm"
-/// forgotten_password_selector : null
-/// forgotten_password_code : null
-/// forgotten_password_time : null
-/// remember_selector : null
-/// remember_code : null
-/// created_on : "1648218075"
-/// last_login : "1648272756"
-/// active : "1"
-/// company : null
-/// address : "ddfds"
-/// bonus : "2"
-/// cash_received : "0.00"
-/// dob : "1998-03-14"
-/// country_code : null
-/// city : null
-/// area : null
-/// street : null
-/// license : "uploads/media/2022/sand.jpg"
-/// vehicle : "Mp 44 mc 3223"
-/// pincode : null
-/// serviceable_zipcodes : "9"
-/// apikey : null
-/// referral_code : null
-/// friends_code : null
-/// fcm_id : "f31YocDUQ-i69KeexwX71f:APA91bH5Xk-XZt4BpJ8IRo2ltBeHIRbJUj7Tjjsta-2FWPpWy0Aq0DJ1jBI87Vn4P5i3zTYizMeUNNvA2sPLo_WY99vYh7ZtLQPVNBdgO4ptYEBdPcDqu_InLYgVSfh2pX8Vji8KQMDY"
-/// latitude : null
-/// longitude : null
-/// open_close_status : "0"
-/// created_at : "2022-03-25 19:51:15"
-/// gst_file : ""
-/// food_lic : ""
-/// account_name : "dfddfd"
-/// pro_pic : ""
-/// account_number : "333333333333444444"
-/// bank_code : "uploads/media/2022/sand.jpg"
-/// bank_name : "uploads/media/2022/sand.jpg"
 
 Data dataFromJson(String str) => Data.fromJson(json.decode(str));
 String dataToJson(Data data) => json.encode(data.toJson());
+
 class Data {
   Data({
-      String? id, 
-      String? ipAddress, 
-      String? username, 
-      String? email, 
-      String? mobile, 
-      dynamic image, 
-      String? gender, 
-      String? balance, 
-      String? activationSelector, 
-      String? activationCode, 
-      dynamic forgottenPasswordSelector, 
-      dynamic forgottenPasswordCode, 
-      dynamic forgottenPasswordTime, 
-      dynamic rememberSelector, 
-      dynamic rememberCode, 
-      String? createdOn, 
-      String? lastLogin, 
-      String? active, 
-      dynamic company, 
-      String? address, 
-      String? bonus, 
-      String? cashReceived, 
-      String? dob, 
-      dynamic countryCode, 
-      dynamic city, 
-      dynamic area, 
-      dynamic street, 
-      String? license, 
-      String? vehicle, 
-      dynamic pincode, 
-      String? serviceableZipcodes, 
-      dynamic apikey, 
-      dynamic referralCode, 
-      dynamic friendsCode, 
-      String? fcmId, 
-      dynamic latitude, 
-      dynamic longitude, 
-      String? openCloseStatus, 
-      String? createdAt, 
-      String? gstFile, 
-      String? foodLic, 
-      String? accountName, 
-      String? proPic, 
-      String? accountNumber, 
-      String? bankCode, 
-      String? bankName,}){
+    String? id,
+    String? ipAddress,
+    String? username,
+    String? email,
+    String? mobile,
+    dynamic image,
+    String? gender,
+    String? balance,
+    String? activationSelector,
+    String? activationCode,
+    dynamic forgottenPasswordSelector,
+    dynamic forgottenPasswordCode,
+    dynamic forgottenPasswordTime,
+    dynamic rememberSelector,
+    dynamic rememberCode,
+    String? createdOn,
+    String? lastLogin,
+    String? active,
+    dynamic company,
+    String? address,
+    String? bonus,
+    String? cashReceived,
+    String? dob,
+    dynamic countryCode,
+    dynamic city,
+    dynamic area,
+    dynamic street,
+    String? license,
+    String? licenseNumber,
+    String? licenseNumberEx,
+    String? adharNum,
+    String? adharFrontImage,
+    String? adharBackImage,
+    String? pancardImage,
+    String? pancard,
+    String? rcBackImage,
+    String? rcFrontImage,
+    String? rcNumber,
+    String? insuranceImage,
+    String? insuranceNumber,
+    String? vehicle,
+    dynamic pincode,
+    String? serviceableZipcodes,
+    dynamic apikey,
+    dynamic referralCode,
+    dynamic friendsCode,
+    String? fcmId,
+    dynamic latitude,
+    dynamic longitude,
+    String? openCloseStatus,
+    String? createdAt,
+    String? gstFile,
+    String? foodLic,
+    String? accountName,
+    String? proPic,
+    String? accountNumber,
+    String? bankCode,
+    String? bankName,
+  }) {
     _id = id;
     _ipAddress = ipAddress;
     _username = username;
@@ -185,6 +159,18 @@ class Data {
     _area = area;
     _street = street;
     _license = license;
+    _licenseNumber = licenseNumber;
+    _adharNum = adharNum;
+    _adharFrontImage = adharFrontImage;
+    _adharBackImage = adharBackImage;
+    _pancardImage = pancardImage;
+    _pancard = pancard;
+    _rcBackImage = rcBackImage;
+    _rcFrontImage = rcFrontImage;
+    _rcNumber = rcNumber;
+    _insuranceImage = insuranceImage;
+    _insuranceNumber = insuranceNumber;
+    _licenseNumberEx = licenseNumberEx;
     _vehicle = vehicle;
     _pincode = pincode;
     _serviceableZipcodes = serviceableZipcodes;
@@ -203,7 +189,7 @@ class Data {
     _accountNumber = accountNumber;
     _bankCode = bankCode;
     _bankName = bankName;
-}
+  }
 
   Data.fromJson(dynamic json) {
     _id = json['id'];
@@ -234,6 +220,18 @@ class Data {
     _area = json['area'];
     _street = json['street'];
     _license = json['license'];
+    _licenseNumber = json['license_number'];
+    _licenseNumberEx = json['license_number_ex'];
+    _adharNum = json['adhar_num'];
+    _adharFrontImage = json['adhar_front_image'];
+    _adharBackImage = json['adhar_back_image'];
+    _pancardImage = json['pancard_image'];
+    _pancard = json['pancard'];
+    _rcBackImage = json['rc_back_image'];
+    _rcFrontImage = json['rc_front_image'];
+    _rcNumber = json['rc_number'];
+    _insuranceImage = json['insurance_image'];
+    _insuranceNumber = json['insurance_number'];
     _vehicle = json['vehicle'];
     _pincode = json['pincode'];
     _serviceableZipcodes = json['serviceable_zipcodes'];
@@ -281,6 +279,18 @@ class Data {
   dynamic _area;
   dynamic _street;
   String? _license;
+  String? _licenseNumber;
+  String? _licenseNumberEx;
+  String? _adharNum;
+  String? _adharFrontImage;
+  String? _adharBackImage;
+  String? _pancardImage;
+  String? _pancard;
+  String? _rcBackImage;
+  String? _rcFrontImage;
+  String? _rcNumber;
+  String? _insuranceImage;
+  String? _insuranceNumber;
   String? _vehicle;
   dynamic _pincode;
   String? _serviceableZipcodes;
@@ -299,99 +309,127 @@ class Data {
   String? _accountNumber;
   String? _bankCode;
   String? _bankName;
-Data copyWith({  String? id,
-  String? ipAddress,
-  String? username,
-  String? email,
-  String? mobile,
-  dynamic image,
-  String? gender,
-  String? balance,
-  String? activationSelector,
-  String? activationCode,
-  dynamic forgottenPasswordSelector,
-  dynamic forgottenPasswordCode,
-  dynamic forgottenPasswordTime,
-  dynamic rememberSelector,
-  dynamic rememberCode,
-  String? createdOn,
-  String? lastLogin,
-  String? active,
-  dynamic company,
-  String? address,
-  String? bonus,
-  String? cashReceived,
-  String? dob,
-  dynamic countryCode,
-  dynamic city,
-  dynamic area,
-  dynamic street,
-  String? license,
-  String? vehicle,
-  dynamic pincode,
-  String? serviceableZipcodes,
-  dynamic apikey,
-  dynamic referralCode,
-  dynamic friendsCode,
-  String? fcmId,
-  dynamic latitude,
-  dynamic longitude,
-  String? openCloseStatus,
-  String? createdAt,
-  String? gstFile,
-  String? foodLic,
-  String? accountName,
-  String? proPic,
-  String? accountNumber,
-  String? bankCode,
-  String? bankName,
-}) => Data(  id: id ?? _id,
-  ipAddress: ipAddress ?? _ipAddress,
-  username: username ?? _username,
-  email: email ?? _email,
-  mobile: mobile ?? _mobile,
-  image: image ?? _image,
-  gender: gender ?? _gender,
-  balance: balance ?? _balance,
-  activationSelector: activationSelector ?? _activationSelector,
-  activationCode: activationCode ?? _activationCode,
-  forgottenPasswordSelector: forgottenPasswordSelector ?? _forgottenPasswordSelector,
-  forgottenPasswordCode: forgottenPasswordCode ?? _forgottenPasswordCode,
-  forgottenPasswordTime: forgottenPasswordTime ?? _forgottenPasswordTime,
-  rememberSelector: rememberSelector ?? _rememberSelector,
-  rememberCode: rememberCode ?? _rememberCode,
-  createdOn: createdOn ?? _createdOn,
-  lastLogin: lastLogin ?? _lastLogin,
-  active: active ?? _active,
-  company: company ?? _company,
-  address: address ?? _address,
-  bonus: bonus ?? _bonus,
-  cashReceived: cashReceived ?? _cashReceived,
-  dob: dob ?? _dob,
-  countryCode: countryCode ?? _countryCode,
-  city: city ?? _city,
-  area: area ?? _area,
-  street: street ?? _street,
-  license: license ?? _license,
-  vehicle: vehicle ?? _vehicle,
-  pincode: pincode ?? _pincode,
-  serviceableZipcodes: serviceableZipcodes ?? _serviceableZipcodes,
-  apikey: apikey ?? _apikey,
-  referralCode: referralCode ?? _referralCode,
-  friendsCode: friendsCode ?? _friendsCode,
-  fcmId: fcmId ?? _fcmId,
-  latitude: latitude ?? _latitude,
-  longitude: longitude ?? _longitude,
-  openCloseStatus: openCloseStatus ?? _openCloseStatus,
-  createdAt: createdAt ?? _createdAt,
-  gstFile: gstFile ?? _gstFile,
-  foodLic: foodLic ?? _foodLic,
-  accountName: accountName ?? _accountName,
-  proPic: proPic ?? _proPic,
-  accountNumber: accountNumber ?? _accountNumber,
-  bankCode: bankCode ?? _bankCode,
-  bankName: bankName ?? _bankName,
-);
+  Data copyWith({
+    String? id,
+    String? ipAddress,
+    String? username,
+    String? email,
+    String? mobile,
+    dynamic image,
+    String? gender,
+    String? balance,
+    String? activationSelector,
+    String? activationCode,
+    dynamic forgottenPasswordSelector,
+    dynamic forgottenPasswordCode,
+    dynamic forgottenPasswordTime,
+    dynamic rememberSelector,
+    dynamic rememberCode,
+    String? createdOn,
+    String? lastLogin,
+    String? active,
+    dynamic company,
+    String? address,
+    String? bonus,
+    String? cashReceived,
+    String? dob,
+    dynamic countryCode,
+    dynamic city,
+    dynamic area,
+    dynamic street,
+    String? license,
+    String? licenseNumber,
+    String? licenseNumberEx,
+    String? adharNum,
+    String? adharFrontImage,
+    String? adharBackImage,
+    String? pancardImage,
+    String? pancard,
+    String? rcBackImage,
+    String? rcFrontImage,
+    String? rcNumber,
+    String? insuranceImage,
+    String? insuranceNumber,
+    String? vehicle,
+    dynamic pincode,
+    String? serviceableZipcodes,
+    dynamic apikey,
+    dynamic referralCode,
+    dynamic friendsCode,
+    String? fcmId,
+    dynamic latitude,
+    dynamic longitude,
+    String? openCloseStatus,
+    String? createdAt,
+    String? gstFile,
+    String? foodLic,
+    String? accountName,
+    String? proPic,
+    String? accountNumber,
+    String? bankCode,
+    String? bankName,
+  }) =>
+      Data(
+        id: id ?? _id,
+        ipAddress: ipAddress ?? _ipAddress,
+        username: username ?? _username,
+        email: email ?? _email,
+        mobile: mobile ?? _mobile,
+        image: image ?? _image,
+        gender: gender ?? _gender,
+        balance: balance ?? _balance,
+        activationSelector: activationSelector ?? _activationSelector,
+        activationCode: activationCode ?? _activationCode,
+        forgottenPasswordSelector:
+            forgottenPasswordSelector ?? _forgottenPasswordSelector,
+        forgottenPasswordCode: forgottenPasswordCode ?? _forgottenPasswordCode,
+        forgottenPasswordTime: forgottenPasswordTime ?? _forgottenPasswordTime,
+        rememberSelector: rememberSelector ?? _rememberSelector,
+        rememberCode: rememberCode ?? _rememberCode,
+        createdOn: createdOn ?? _createdOn,
+        lastLogin: lastLogin ?? _lastLogin,
+        active: active ?? _active,
+        company: company ?? _company,
+        address: address ?? _address,
+        bonus: bonus ?? _bonus,
+        cashReceived: cashReceived ?? _cashReceived,
+        dob: dob ?? _dob,
+        countryCode: countryCode ?? _countryCode,
+        city: city ?? _city,
+        area: area ?? _area,
+        street: street ?? _street,
+        license: license ?? _license,
+        licenseNumber: licenseNumber ?? _licenseNumber,
+        licenseNumberEx: licenseNumberEx ?? _licenseNumberEx,
+        adharNum: adharNum ?? _adharNum,
+        adharFrontImage: adharFrontImage ?? _adharFrontImage,
+        adharBackImage: adharBackImage ?? _adharBackImage,
+        pancardImage: pancardImage ?? _pancardImage,
+        pancard: pancard ?? _pancard,
+        rcBackImage: rcBackImage ?? _rcBackImage,
+        rcFrontImage: rcFrontImage ?? _rcFrontImage,
+        rcNumber: rcNumber ?? _rcNumber,
+        insuranceImage: insuranceImage ?? _insuranceImage,
+        insuranceNumber: insuranceNumber ?? _insuranceNumber,
+        vehicle: vehicle ?? _vehicle,
+        pincode: pincode ?? _pincode,
+        serviceableZipcodes: serviceableZipcodes ?? _serviceableZipcodes,
+        apikey: apikey ?? _apikey,
+        referralCode: referralCode ?? _referralCode,
+        friendsCode: friendsCode ?? _friendsCode,
+        fcmId: fcmId ?? _fcmId,
+        latitude: latitude ?? _latitude,
+        longitude: longitude ?? _longitude,
+        openCloseStatus: openCloseStatus ?? _openCloseStatus,
+        createdAt: createdAt ?? _createdAt,
+        gstFile: gstFile ?? _gstFile,
+        foodLic: foodLic ?? _foodLic,
+        accountName: accountName ?? _accountName,
+        proPic: proPic ?? _proPic,
+        accountNumber: accountNumber ?? _accountNumber,
+        bankCode: bankCode ?? _bankCode,
+        bankName: bankName ?? _bankName,
+      );
   String? get id => _id;
   String? get ipAddress => _ipAddress;
   String? get username => _username;
@@ -420,6 +458,18 @@ Data copyWith({  String? id,
   dynamic get area => _area;
   dynamic get street => _street;
   String? get license => _license;
+  String? get licenseNumber => _licenseNumber;
+  String? get licenseNumberEx => _licenseNumberEx;
+  String? get adharNum => _adharNum;
+  String? get adharFrontImage => _adharFrontImage;
+  String? get adharBackImage => _adharBackImage;
+  String? get pancardImage => _pancardImage;
+  String? get pancard => _pancard;
+  String? get rcBackImage => _rcBackImage;
+  String? get rcFrontImage => _rcFrontImage;
+  String? get rcNumber => _rcNumber;
+  String? get insuranceImage => _insuranceImage;
+  String? get insuranceNumber => _insuranceNumber;
   String? get vehicle => _vehicle;
   dynamic get pincode => _pincode;
   String? get serviceableZipcodes => _serviceableZipcodes;
@@ -469,6 +519,18 @@ Data copyWith({  String? id,
     map['area'] = _area;
     map['street'] = _street;
     map['license'] = _license;
+    map['license_number'] = _licenseNumber;
+    map['license_number_ex'] = _licenseNumberEx;
+    map['adhar_num'] = _adharNum;
+    map['adhar_front_image'] = _adharFrontImage;
+    map['adhar_back_image'] = _adharBackImage;
+    map['pancard_image'] = _pancardImage;
+    map['pancard'] = _pancard;
+    map['rc_back_image'] = _rcBackImage;
+    map['rc_front_image'] = _rcFrontImage;
+    map['rc_number'] = _rcNumber;
+    map['insurance_image'] = _insuranceImage;
+    map['insurance_number'] = _insuranceNumber;
     map['vehicle'] = _vehicle;
     map['pincode'] = _pincode;
     map['serviceable_zipcodes'] = _serviceableZipcodes;
@@ -489,5 +551,4 @@ Data copyWith({  String? id,
     map['bank_name'] = _bankName;
     return map;
   }
-
 }

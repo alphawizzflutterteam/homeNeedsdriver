@@ -238,7 +238,8 @@ class StateProfile extends State<Profile> with TickerProviderStateMixin {
       await buttonController!.reverse();
       if (!error) {
         CUR_USERNAME = name;
-        saveUserDetail(userId: CUR_USERID!, name: name!, email: email!, mobile: mobile!);
+        saveUserDetail(
+            userId: CUR_USERID!, name: name!, email: email!, mobile: mobile!);
         setSnackbar("Password Change Successfully");
       } else {
         setSnackbar(msg!);
@@ -823,6 +824,7 @@ class StateProfile extends State<Profile> with TickerProviderStateMixin {
       ),
     );
   }
+
   profile() {
     return Container(
       child: FutureBuilder(
@@ -832,7 +834,8 @@ class StateProfile extends State<Profile> with TickerProviderStateMixin {
               var data = snapshot.data.data;
               return CircleAvatar(
                 radius: 50,
-                backgroundImage: NetworkImage("${snapshot.data.imgPath}${data[0].proPic}",
+                backgroundImage: NetworkImage(
+                  "${snapshot.data.imgPath}${data[0].proPic}",
                 ),
               );
               //   Container(
@@ -888,50 +891,145 @@ class StateProfile extends State<Profile> with TickerProviderStateMixin {
                     title: Text("Gender"),
                     subtitle: Text("${data[0].gender}"),
                   ),
-                  Divider(color: Colors.black,),
+                  Divider(
+                    color: Colors.black,
+                  ),
                   ListTile(
                     leading: Icon(Icons.date_range),
                     title: Text("Date Of Birth"),
                     subtitle: Text("${data[0].dob}"),
                   ),
-                  Divider(color: Colors.black,),
+                  Divider(
+                    color: Colors.black,
+                  ),
                   ListTile(
                     leading: Icon(Icons.electric_bike),
                     title: Text("Vehicle No."),
                     subtitle: Text("${data[0].vehicle}"),
                   ),
-                  Divider(color: Colors.black,),
+                  Divider(
+                    color: Colors.black,
+                  ),
                   ListTile(
                     leading: Icon(Icons.home),
                     title: Text("Address"),
-                    subtitle: Text(
-                        "${data[0].address}"),
+                    subtitle: Text("${data[0].address}"),
                   ),
-                  Divider(color: Colors.black,),
+                  Divider(
+                    color: Colors.black,
+                  ),
                   ListTile(
                     leading: Icon(Icons.account_balance),
                     title: Text("Account Number"),
-                    subtitle: Text("${data[0].accountNumber}"),),
-                  Divider(color: Colors.black,),
+                    subtitle: Text("${data[0].accountNumber}"),
+                  ),
+                  Divider(
+                    color: Colors.black,
+                  ),
                   ListTile(
                     leading: Icon(Icons.qr_code),
                     title: Text("IFSC Code"),
                     subtitle: Text("${data[0].bankCode}"),
-
                   ),
-                  Divider(color: Colors.black,),
-
+                  Divider(
+                    color: Colors.black,
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.qr_code),
+                    title: Text("License Number"),
+                    subtitle: Text("${data[0].licenseNumber}"),
+                  ),
+                  Divider(
+                    color: Colors.black,
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.qr_code),
+                    title: Text("License Number Ex"),
+                    subtitle: Text("${data[0].licenseNumberEx}"),
+                  ),
+                  Divider(
+                    color: Colors.black,
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.qr_code),
+                    title: Text("Aadhar Number"),
+                    subtitle: Text("${data[0].adharNum}"),
+                  ),
+                  Divider(
+                    color: Colors.black,
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.qr_code),
+                    title: Text("Pan Card"),
+                    subtitle: Text("${data[0].pancard}"),
+                  ),
+                  Divider(
+                    color: Colors.black,
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.qr_code),
+                    title: Text("RC Number"),
+                    subtitle: Text("${data[0].rcNumber}"),
+                  ),
+                  Divider(
+                    color: Colors.black,
+                  ),
                   ListTile(
                     leading: Icon(Icons.local_police),
-                    title:  Text("Licence"),
-                    subtitle:
-                    Card(
-                      child: Image.network("${snapshot.data.imgPath}${data[0].license}"),
+                    title: Text("Licence"),
+                    subtitle: Card(
+                      child: Image.network(
+                          "${snapshot.data.imgPath}${data[0].license}"),
                     ),
-
                   ),
-
-
+                  ListTile(
+                    leading: Icon(Icons.local_police),
+                    title: Text("Pan Card"),
+                    subtitle: Card(
+                      child: Image.network(
+                          "${snapshot.data.imgPath}${data[0].pancardImage}"),
+                    ),
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.local_police),
+                    title: Text("Aadhar Front Image"),
+                    subtitle: Card(
+                      child: Image.network(
+                          "${snapshot.data.imgPath}${data[0].adharFrontImage}"),
+                    ),
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.local_police),
+                    title: Text("Aadhar Back Image"),
+                    subtitle: Card(
+                      child: Image.network(
+                          "${snapshot.data.imgPath}${data[0].adharBackImage}"),
+                    ),
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.local_police),
+                    title: Text("Rc Back Image"),
+                    subtitle: Card(
+                      child: Image.network(
+                          "${snapshot.data.imgPath}${data[0].rcBackImage}"),
+                    ),
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.local_police),
+                    title: Text("Rc Front Image"),
+                    subtitle: Card(
+                      child: Image.network(
+                          "${snapshot.data.imgPath}${data[0].rcFrontImage}"),
+                    ),
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.local_police),
+                    title: Text("Insurance Image"),
+                    subtitle: Card(
+                      child: Image.network(
+                          "${snapshot.data.imgPath}${data[0].insuranceImage}"),
+                    ),
+                  ),
                 ],
               );
             } else if (snapshot.hasError) {
@@ -956,8 +1054,8 @@ class StateProfile extends State<Profile> with TickerProviderStateMixin {
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
             child: _isNetworkAvail
                 ? Column(children: <Widget>[
-                   // profileImage(),
-              profile(),
+                    // profileImage(),
+                    profile(),
                     Padding(
                         padding: const EdgeInsets.only(top: 20, bottom: 5.0),
                         child: Container(
@@ -978,7 +1076,9 @@ class StateProfile extends State<Profile> with TickerProviderStateMixin {
                                   ],
                                 )))),
                     changePass(),
-              SizedBox(height: 20.0,),
+                    SizedBox(
+                      height: 20.0,
+                    ),
                   ])
                 : noInternet(context)));
   }
@@ -1002,9 +1102,9 @@ class StateProfile extends State<Profile> with TickerProviderStateMixin {
 
   Future<GetBoUpdateModel?> getupdateboy(id) async {
     var header = headers;
-    var request = http.MultipartRequest(
-        'POST', getDeliveryBoyDetailApi );
+    var request = http.MultipartRequest('POST', getDeliveryBoyDetailApi);
     request.fields.addAll({'id': '$id'});
+    print("fffffffffff________${request.fields}");
 
     request.headers.addAll(header);
 

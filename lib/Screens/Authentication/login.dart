@@ -8,6 +8,7 @@ import 'package:deliveryboy_multivendor/Helper/cropped_container.dart';
 import 'package:deliveryboy_multivendor/Helper/string.dart';
 import 'package:deliveryboy_multivendor/Screens/home.dart';
 import 'package:deliveryboy_multivendor/Screens/privacy_policy.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -39,6 +40,7 @@ class _LoginPageState extends State<Login> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
+    getToken();
     buttonController = AnimationController(
         duration: const Duration(milliseconds: 2000), vsync: this);
 
@@ -52,7 +54,14 @@ class _LoginPageState extends State<Login> with TickerProviderStateMixin {
         0.150,
       ),
     ));
+  }
 
+  String? fcmToken;
+  getToken() {
+    FirebaseMessaging.instance.getToken().then((value) {
+      fcmToken = value!;
+    });
+    print("fcm is ${fcmToken}");
   }
 
   @override
@@ -143,8 +152,13 @@ class _LoginPageState extends State<Login> with TickerProviderStateMixin {
     );
   }
 
+  bool isLoading = false;
   Future<void> getLoginUser() async {
-    var data = {MOBILE: mobile, PASSWORD: password};
+    isLoading = true;
+    setState(() {});
+    print("this is fcm Token $fcmToken");
+    var data = {MOBILE: mobile, PASSWORD: password, "fcm_id": fcmToken};
+    print("dfkjjjjjjjj_________${data}");
     try {
       var response = await post(getUserLoginApi, body: data, headers: headers)
           .timeout(Duration(seconds: timeOut));
@@ -156,7 +170,6 @@ class _LoginPageState extends State<Login> with TickerProviderStateMixin {
         String? msg = getdata["message"];
         await buttonController!.reverse();
         if (!error) {
-
           setSnackbar(msg!);
           var i = getdata["data"][0];
           id = i[ID];
@@ -169,10 +182,7 @@ class _LoginPageState extends State<Login> with TickerProviderStateMixin {
           CUR_USERNAME = username;
 
           saveUserDetail(
-              userId: id!,
-              name: username!,
-              email: email!,
-              mobile: mobile!);
+              userId: id!, name: username!, email: email!, mobile: mobile!);
           setPrefrenceBool(isLogin, true);
           Navigator.pushReplacement(
               context,
@@ -193,25 +203,23 @@ class _LoginPageState extends State<Login> with TickerProviderStateMixin {
 
   Widget signInTxt() {
     return Padding(
-        padding: const EdgeInsets.only(
-            top: 30.0,left: 30
-        ),
+        padding: const EdgeInsets.only(top: 30.0, left: 30),
         child: Align(
           alignment: Alignment.topLeft,
           child: Text(
             SIGNIN_LBL,
-            style: Theme.of(context)
-                .textTheme
-                .headline5!
-                .copyWith(color: primary, fontWeight: FontWeight.bold,),
+            style: Theme.of(context).textTheme.headline5!.copyWith(
+                  color: primary,
+                  fontWeight: FontWeight.bold,
+                ),
           ),
         ));
   }
 
   Widget termAndPolicyTxt() {
     return Padding(
-      padding:
-      const EdgeInsets.only(bottom: 30.0, left: 25.0, right: 25.0, top: 10.0),
+      padding: const EdgeInsets.only(
+          bottom: 30.0, left: 25.0, right: 25.0, top: 10.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
@@ -230,8 +238,8 @@ class _LoginPageState extends State<Login> with TickerProviderStateMixin {
                       context,
                       MaterialPageRoute(
                           builder: (context) => PrivacyPolicy(
-                            title: TERM,
-                          )));
+                                title: TERM,
+                              )));
                 },
                 child: Text(
                   TERMS_SERVICE_LBL,
@@ -257,8 +265,8 @@ class _LoginPageState extends State<Login> with TickerProviderStateMixin {
                       context,
                       MaterialPageRoute(
                           builder: (context) => const PrivacyPolicy(
-                            title: PRIVACY,
-                          )));
+                                title: PRIVACY,
+                              )));
                 },
                 child: Text(
                   PRIVACY_POLICY_LBL,
@@ -379,14 +387,15 @@ class _LoginPageState extends State<Login> with TickerProviderStateMixin {
                     context,
                     MaterialPageRoute(
                         builder: (context) => SendOtp(
-                          checkOtp: "true",
-                          title: FORGOT_PASS_TITLE,
-                        ))
-                );
+                              checkOtp: "true",
+                              title: FORGOT_PASS_TITLE,
+                            )));
               },
               child: Text(FORGOT_PASSWORD_LBL,
                   style: Theme.of(context).textTheme.subtitle2!.copyWith(
-                    color: fontColor, fontWeight: FontWeight.normal,)),
+                        color: fontColor,
+                        fontWeight: FontWeight.normal,
+                      )),
             ),
           ],
         ));
@@ -409,29 +418,29 @@ class _LoginPageState extends State<Login> with TickerProviderStateMixin {
     deviceWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      backgroundColor: primary,
+        backgroundColor: primary,
         key: _scaffoldKey,
         body: _isNetworkAvail
             ? Container(
-          color:primary,
-          child: Stack(
-            children: [
-              Container(
-                width: double.infinity,
-                height: double.infinity,
-                 decoration: back(),
-              ),
-              Image.asset(
-                'assets/images/doodle.png',
-                fit: BoxFit.fill,
-                width: double.infinity,
-                height: double.infinity,
-              ),
-              getLoginContainer(),
-              getLogo(),
-            ],
-          ),
-        )
+                color: primary,
+                child: Stack(
+                  children: [
+                    Container(
+                      width: double.infinity,
+                      height: double.infinity,
+                      decoration: back(),
+                    ),
+                    Image.asset(
+                      'assets/images/doodle.png',
+                      fit: BoxFit.fill,
+                      width: double.infinity,
+                      height: double.infinity,
+                    ),
+                    getLoginContainer(),
+                    getLogo(),
+                  ],
+                ),
+              )
             : noInternet(context));
   }
 
@@ -459,7 +468,7 @@ class _LoginPageState extends State<Login> with TickerProviderStateMixin {
               child: SingleChildScrollView(
                 child: ConstrainedBox(
                   constraints: BoxConstraints(
-                    maxHeight: MediaQuery.of(context).size.height *2,
+                    maxHeight: MediaQuery.of(context).size.height * 2,
                   ),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
@@ -473,7 +482,6 @@ class _LoginPageState extends State<Login> with TickerProviderStateMixin {
                       forgetPass(),
                       loginBtn(),
                       termAndPolicyTxt(),
-
                     ],
                   ),
                 ),

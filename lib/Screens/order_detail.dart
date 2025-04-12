@@ -14,8 +14,6 @@ import 'package:http/http.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../livetracking.dart';
 
-
-
 class OrderDetail extends StatefulWidget {
   final Order_Model? model;
   final Function? updateHome;
@@ -186,196 +184,206 @@ class StateOrder extends State<OrderDetail> with TickerProviderStateMixin {
       appBar: getAppBar(ORDER_DETAIL, context),
       body: _isNetworkAvail
           ? Stack(
-        children: [
-          Column(
-            children: [
-              Expanded(
-                child: SingleChildScrollView(
-                  controller: controller,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      children: [
-                        Card(
-                            elevation: 0,
-                            child: Container(
-                                width: MediaQuery.of(context).size.width,
-                                padding: const EdgeInsets.all(12.0),
-                                child: Column(
-                                  crossAxisAlignment:
-                                  CrossAxisAlignment.start,
-                                  children: [
-                                    Row(
-                                      mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          "$ORDER_ID_LBL - ${model.id!}",
+              children: [
+                Column(
+                  children: [
+                    Expanded(
+                      child: SingleChildScrollView(
+                        controller: controller,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            children: [
+                              Card(
+                                  elevation: 0,
+                                  child: Container(
+                                      width: MediaQuery.of(context).size.width,
+                                      padding: const EdgeInsets.all(12.0),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text(
+                                                "$ORDER_ID_LBL - ${model.id!}",
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .subtitle2!
+                                                    .copyWith(
+                                                        color: lightBlack2),
+                                              ),
+                                              Text(
+                                                model.orderDate!,
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .subtitle2!
+                                                    .copyWith(
+                                                        color: lightBlack2),
+                                              ),
+                                            ],
+                                          ),
+                                          Text(
+                                            "$PAYMENT_MTHD - ${model.payMethod!}",
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .subtitle2!
+                                                .copyWith(color: lightBlack2),
+                                          ),
+                                        ],
+                                      ))),
+                              model.delDate != null && model.delDate!.isNotEmpty
+                                  ? Card(
+                                      elevation: 0,
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(12.0),
+                                        child: Text(
+                                          "$PREFER_DATE_TIME: ${model.delDate!} - ${model.delTime!}",
                                           style: Theme.of(context)
                                               .textTheme
                                               .subtitle2!
-                                              .copyWith(
-                                              color: lightBlack2),
+                                              .copyWith(color: lightBlack2),
                                         ),
-                                        Text(
-                                          model.orderDate!,
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .subtitle2!
-                                              .copyWith(
-                                              color: lightBlack2),
-                                        ),
-                                      ],
-                                    ),
-                                    Text(
-                                      "$PAYMENT_MTHD - ${model.payMethod!}",
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .subtitle2!
-                                          .copyWith(color: lightBlack2),
-                                    ),
-                                  ],
-                                ))),
-                        model.delDate != null && model.delDate!.isNotEmpty
-                            ? Card(
-                            elevation: 0,
-                            child: Padding(
-                              padding: const EdgeInsets.all(12.0),
-                              child: Text(
-                                "$PREFER_DATE_TIME: ${model.delDate!} - ${model.delTime!}",
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .subtitle2!
-                                    .copyWith(color: lightBlack2),
+                                      ))
+                                  : Container(),
+                              ListView.builder(
+                                shrinkWrap: true,
+                                itemCount: model.itemList!.length,
+                                physics: const NeverScrollableScrollPhysics(),
+                                itemBuilder: (context, i) {
+                                  OrderItem orderItem = model.itemList![i];
+                                  return productItem(orderItem, model, i);
+                                },
                               ),
-                            ))
-                            : Container(),
-                        ListView.builder(
-                          shrinkWrap: true,
-                          itemCount: model.itemList!.length,
-                          physics: const NeverScrollableScrollPhysics(),
-                          itemBuilder: (context, i) {
-                            OrderItem orderItem = model.itemList![i];
-                            return productItem(orderItem, model, i);
-                          },
-                        ),
-
-                        InkWell(
-                          onTap: () {
-
-                            Navigator.push(context,MaterialPageRoute(builder: (context) => UserMapScreen(DriverId: model.deliveryBoyId,userlang: model.longitude,userlat: model.latitude),) );
-                          },
-                          child: Container(
-                            decoration: BoxDecoration(
-
-
-                              border: Border.all(color: Colors.black12),
-                              borderRadius: BorderRadius.circular(3),),
-
-                            height: 50,
-                            width: MediaQuery.of(context).size.width,
-                            child: Center(child: Text('Track To Driver',style: TextStyle(fontSize: 13,color: Colors.red),),),
+                              // InkWell(
+                              //   onTap: () {
+                              //     Navigator.push(
+                              //         context,
+                              //         MaterialPageRoute(
+                              //           builder: (context) => UserMapScreen(
+                              //               DriverId: model.deliveryBoyId,
+                              //               userlang: model.longitude,
+                              //               userlat: model.latitude),
+                              //         ));
+                              //   },
+                              //   // child: Container(
+                              //   //   decoration: BoxDecoration(
+                              //   //     border: Border.all(color: Colors.black12),
+                              //   //     borderRadius: BorderRadius.circular(3),
+                              //   //   ),
+                              //   //   height: 50,
+                              //   //   width: MediaQuery.of(context).size.width,
+                              //   //   child: Center(
+                              //   //     child: Text(
+                              //   //       'Track To Driver',
+                              //   //       style: TextStyle(
+                              //   //           fontSize: 13, color: Colors.red),
+                              //   //     ),
+                              //   //   ),
+                              //   // ),
+                              // ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              sellerDetails(),
+                              shippingDetails(),
+                              priceDetails(),
+                            ],
                           ),
                         ),
-
-                        SizedBox(height: 10,),
-                        sellerDetails(),
-                        shippingDetails(),
-                        priceDetails(),
-                      ],
+                      ),
                     ),
-                  ),
+                    // Padding(
+                    //   padding: const EdgeInsets.all(10.0),
+                    //   child: Row(
+                    //     children: [
+                    //       Expanded(
+                    //         child: Padding(
+                    //           padding: const EdgeInsets.only(right: 8.0),
+                    //           child: DropdownButtonFormField(
+                    //             dropdownColor: lightWhite,
+                    //             isDense: true,
+                    //             iconEnabledColor: fontColor,
+                    //
+                    //             hint: new Text(
+                    //               "Update Status",
+                    //               style: Theme.of(this.context)
+                    //                   .textTheme
+                    //                   .subtitle2!
+                    //                   .copyWith(
+                    //                       color: fontColor,
+                    //                       fontWeight: FontWeight.bold),
+                    //             ),
+                    //            decoration: InputDecoration(
+                    //               filled: true,
+                    //               isDense: true,
+                    //               fillColor: lightWhite,
+                    //               contentPadding: EdgeInsets.symmetric(
+                    //                   vertical: 10, horizontal: 10),
+                    //               enabledBorder: OutlineInputBorder(
+                    //                 borderSide: BorderSide(color: fontColor),
+                    //               ),
+                    //             ),
+                    //             value: widget.model!.activeStatus,
+                    //             onChanged: (dynamic newValue) {
+                    //               setState(() {
+                    //                 curStatus = newValue;
+                    //               });
+                    //             },
+                    //             items: statusList.map((String st) {
+                    //               return DropdownMenuItem<String>(
+                    //                 value: st,
+                    //                 child: Text(
+                    //                   capitalize(st),
+                    //                   style: Theme.of(this.context)
+                    //                       .textTheme
+                    //                       .subtitle2!
+                    //                       .copyWith(
+                    //                           color: fontColor,
+                    //                           fontWeight: FontWeight.bold),
+                    //                 ),
+                    //               );
+                    //             }).toList(),
+                    //           ),
+                    //         ),
+                    //       ),
+                    //       RawMaterialButton(
+                    //         constraints:
+                    //             BoxConstraints.expand(width: 42, height: 42),
+                    //         onPressed: () {
+                    //           if (model.otp != null &&
+                    //               model.otp!.isNotEmpty &&
+                    //               model.otp != "0" &&
+                    //               curStatus == DELIVERD)
+                    //             otpDialog(
+                    //                 curStatus, model.otp, model.id, false, 0);
+                    //           else
+                    //             updateOrder(curStatus, updateOrderApi, model.id,
+                    //                 false, 0);
+                    //         },
+                    //         elevation: 2.0,
+                    //         fillColor: fontColor,
+                    //         padding: EdgeInsets.only(left: 5),
+                    //         child: Align(
+                    //           alignment: Alignment.center,
+                    //           child: Icon(
+                    //             Icons.send,
+                    //             size: 20,
+                    //             color: white,
+                    //           ),
+                    //         ),
+                    //         shape: CircleBorder(),
+                    //       )
+                    //     ],
+                    //   ),
+                    // )
+                  ],
                 ),
-              ),
-              // Padding(
-              //   padding: const EdgeInsets.all(10.0),
-              //   child: Row(
-              //     children: [
-              //       Expanded(
-              //         child: Padding(
-              //           padding: const EdgeInsets.only(right: 8.0),
-              //           child: DropdownButtonFormField(
-              //             dropdownColor: lightWhite,
-              //             isDense: true,
-              //             iconEnabledColor: fontColor,
-              //
-              //             hint: new Text(
-              //               "Update Status",
-              //               style: Theme.of(this.context)
-              //                   .textTheme
-              //                   .subtitle2!
-              //                   .copyWith(
-              //                       color: fontColor,
-              //                       fontWeight: FontWeight.bold),
-              //             ),
-              //            decoration: InputDecoration(
-              //               filled: true,
-              //               isDense: true,
-              //               fillColor: lightWhite,
-              //               contentPadding: EdgeInsets.symmetric(
-              //                   vertical: 10, horizontal: 10),
-              //               enabledBorder: OutlineInputBorder(
-              //                 borderSide: BorderSide(color: fontColor),
-              //               ),
-              //             ),
-              //             value: widget.model!.activeStatus,
-              //             onChanged: (dynamic newValue) {
-              //               setState(() {
-              //                 curStatus = newValue;
-              //               });
-              //             },
-              //             items: statusList.map((String st) {
-              //               return DropdownMenuItem<String>(
-              //                 value: st,
-              //                 child: Text(
-              //                   capitalize(st),
-              //                   style: Theme.of(this.context)
-              //                       .textTheme
-              //                       .subtitle2!
-              //                       .copyWith(
-              //                           color: fontColor,
-              //                           fontWeight: FontWeight.bold),
-              //                 ),
-              //               );
-              //             }).toList(),
-              //           ),
-              //         ),
-              //       ),
-              //       RawMaterialButton(
-              //         constraints:
-              //             BoxConstraints.expand(width: 42, height: 42),
-              //         onPressed: () {
-              //           if (model.otp != null &&
-              //               model.otp!.isNotEmpty &&
-              //               model.otp != "0" &&
-              //               curStatus == DELIVERD)
-              //             otpDialog(
-              //                 curStatus, model.otp, model.id, false, 0);
-              //           else
-              //             updateOrder(curStatus, updateOrderApi, model.id,
-              //                 false, 0);
-              //         },
-              //         elevation: 2.0,
-              //         fillColor: fontColor,
-              //         padding: EdgeInsets.only(left: 5),
-              //         child: Align(
-              //           alignment: Alignment.center,
-              //           child: Icon(
-              //             Icons.send,
-              //             size: 20,
-              //             color: white,
-              //           ),
-              //         ),
-              //         shape: CircleBorder(),
-              //       )
-              //     ],
-              //   ),
-              // )
-            ],
-          ),
-          showCircularProgress(_isProgress, primary),
-        ],
-      )
+                showCircularProgress(_isProgress, primary),
+              ],
+            )
           : noInternet(context),
     );
   }
@@ -387,96 +395,96 @@ class StateOrder extends State<OrderDetail> with TickerProviderStateMixin {
         builder: (BuildContext context) {
           return StatefulBuilder(
               builder: (BuildContext context, StateSetter setStater) {
-                return AlertDialog(
-                  contentPadding: const EdgeInsets.all(0.0),
-                  shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(5.0))),
-                  content: SingleChildScrollView(
-                      scrollDirection: Axis.vertical,
-                      child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Padding(
-                                padding:
+            return AlertDialog(
+              contentPadding: const EdgeInsets.all(0.0),
+              shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(5.0))),
+              content: SingleChildScrollView(
+                  scrollDirection: Axis.vertical,
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Padding(
+                            padding:
                                 const EdgeInsets.fromLTRB(20.0, 20.0, 0, 2.0),
-                                child: Text(
-                                  OTP_LBL,
-                                  style: Theme.of(this.context)
-                                      .textTheme
-                                      .subtitle1!
-                                      .copyWith(color: fontColor),
-                                )),
-                            const Divider(color: lightBlack),
-                            Form(
-                                key: _formkey,
-                                child: Column(
-                                  children: <Widget>[
-                                    Padding(
-                                        padding: const EdgeInsets.fromLTRB(
-                                            20.0, 0, 20.0, 0),
-                                        child: TextFormField(
-                                          keyboardType: TextInputType.number,
-                                          validator: (String? value) {
-                                            if (value!.isEmpty) {
-                                              return FIELD_REQUIRED;
-                                            } else if (value.trim() != otp) {
-                                              return OTPERROR;
-                                            } else {
-                                              return null;
-                                            }
-                                          },
-                                          autovalidateMode:
+                            child: Text(
+                              OTP_LBL,
+                              style: Theme.of(this.context)
+                                  .textTheme
+                                  .subtitle1!
+                                  .copyWith(color: fontColor),
+                            )),
+                        const Divider(color: lightBlack),
+                        Form(
+                            key: _formkey,
+                            child: Column(
+                              children: <Widget>[
+                                Padding(
+                                    padding: const EdgeInsets.fromLTRB(
+                                        20.0, 0, 20.0, 0),
+                                    child: TextFormField(
+                                      keyboardType: TextInputType.number,
+                                      validator: (String? value) {
+                                        if (value!.isEmpty) {
+                                          return FIELD_REQUIRED;
+                                        } else if (value.trim() != otp) {
+                                          return OTPERROR;
+                                        } else {
+                                          return null;
+                                        }
+                                      },
+                                      autovalidateMode:
                                           AutovalidateMode.onUserInteraction,
-                                          decoration: InputDecoration(
-                                            hintText: OTP_ENTER,
-                                            hintStyle: Theme.of(this.context)
-                                                .textTheme
-                                                .subtitle1!
-                                                .copyWith(
+                                      decoration: InputDecoration(
+                                        hintText: OTP_ENTER,
+                                        hintStyle: Theme.of(this.context)
+                                            .textTheme
+                                            .subtitle1!
+                                            .copyWith(
                                                 color: lightBlack,
                                                 fontWeight: FontWeight.normal),
-                                          ),
-                                          controller: otpC,
-                                        )),
-                                  ],
-                                ))
-                          ])),
-                  actions: <Widget>[
-                    TextButton(
-                        child: Text(
-                          CANCEL,
-                          style: Theme.of(this.context)
-                              .textTheme
-                              .subtitle2!
-                              .copyWith(
+                                      ),
+                                      controller: otpC,
+                                    )),
+                              ],
+                            ))
+                      ])),
+              actions: <Widget>[
+                TextButton(
+                    child: Text(
+                      CANCEL,
+                      style: Theme.of(this.context)
+                          .textTheme
+                          .subtitle2!
+                          .copyWith(
                               color: lightBlack, fontWeight: FontWeight.bold),
-                        ),
-                        onPressed: () {
-                          Navigator.pop(context);
-                        }),
-                    TextButton(
-                        child: Text(
-                          SEND_LBL,
-                          style: Theme.of(this.context)
-                              .textTheme
-                              .subtitle2!
-                              .copyWith(
+                    ),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    }),
+                TextButton(
+                    child: Text(
+                      SEND_LBL,
+                      style: Theme.of(this.context)
+                          .textTheme
+                          .subtitle2!
+                          .copyWith(
                               color: fontColor, fontWeight: FontWeight.bold),
-                        ),
-                        onPressed: () {
-                          final form = _formkey.currentState!;
-                          if (form.validate()) {
-                            form.save();
-                            setState(() {
-                              Navigator.pop(context);
-                            });
-                            updateOrder(curSelected, id, item, index, otp);
-                          }
-                        })
-                  ],
-                );
-              });
+                    ),
+                    onPressed: () {
+                      final form = _formkey.currentState!;
+                      if (form.validate()) {
+                        form.save();
+                        setState(() {
+                          Navigator.pop(context);
+                        });
+                        updateOrder(curSelected, id, item, index, otp);
+                      }
+                    })
+              ],
+            );
+          });
         });
   }
 
@@ -485,10 +493,10 @@ class StateOrder extends State<OrderDetail> with TickerProviderStateMixin {
 
     if (Platform.isAndroid) {
       url =
-      "https://www.google.com/maps/dir/?api=1&destination=$lat,$lng&travelmode=driving&dir_action=navigate";
+          "https://www.google.com/maps/dir/?api=1&destination=$lat,$lng&travelmode=driving&dir_action=navigate";
     } else {
       url =
-      "http://maps.apple.com/?saddr=&daddr=$lat,$lng&directionsmode=driving&dir_action=navigate";
+          "http://maps.apple.com/?saddr=&daddr=$lat,$lng&directionsmode=driving&dir_action=navigate";
     }
     await launch(url);
 /*    if (await canLaunch(url)) {
@@ -504,7 +512,7 @@ class StateOrder extends State<OrderDetail> with TickerProviderStateMixin {
         child: Padding(
             padding: const EdgeInsets.fromLTRB(0, 15.0, 0, 15.0),
             child:
-            Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               Padding(
                   padding: const EdgeInsets.only(left: 15.0, right: 15.0),
                   child: Text(PRICE_DETAIL,
@@ -605,7 +613,7 @@ class StateOrder extends State<OrderDetail> with TickerProviderStateMixin {
               ),
               Padding(
                 padding:
-                const EdgeInsets.only(left: 15.0, right: 15.0, top: 5.0),
+                    const EdgeInsets.only(left: 15.0, right: 15.0, top: 5.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -627,7 +635,7 @@ class StateOrder extends State<OrderDetail> with TickerProviderStateMixin {
         child: Padding(
             padding: const EdgeInsets.fromLTRB(0, 15.0, 0, 15.0),
             child:
-            Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               Padding(
                   padding: const EdgeInsets.only(left: 15.0, right: 15.0),
                   child: Row(
@@ -637,23 +645,23 @@ class StateOrder extends State<OrderDetail> with TickerProviderStateMixin {
                               .textTheme
                               .subtitle2!
                               .copyWith(
-                              color: fontColor,
-                              fontWeight: FontWeight.bold)),
+                                  color: fontColor,
+                                  fontWeight: FontWeight.bold)),
                       const Spacer(),
                       widget.model!.latitude != "" &&
-                          widget.model!.longitude != ""
+                              widget.model!.longitude != ""
                           ? Container(
-                        height: 30,
-                        child: IconButton(
-                            icon: const Icon(
-                              Icons.location_on,
-                              color: fontColor,
-                            ),
-                            onPressed: () {
-                              _launchMap(widget.model!.latitude,
-                                  widget.model!.longitude);
-                            }),
-                      )
+                              height: 30,
+                              child: IconButton(
+                                  icon: const Icon(
+                                    Icons.location_on,
+                                    color: fontColor,
+                                  ),
+                                  onPressed: () {
+                                    _launchMap(widget.model!.latitude,
+                                        widget.model!.longitude);
+                                  }),
+                            )
                           : Container()
                     ],
                   )),
@@ -669,7 +677,7 @@ class StateOrder extends State<OrderDetail> with TickerProviderStateMixin {
                   )),
               Padding(
                   padding:
-                  const EdgeInsets.symmetric(horizontal: 15.0, vertical: 3),
+                      const EdgeInsets.symmetric(horizontal: 15.0, vertical: 3),
                   child: Text(capitalize(widget.model!.address!),
                       style: const TextStyle(color: lightBlack2))),
               InkWell(
@@ -689,11 +697,9 @@ class StateOrder extends State<OrderDetail> with TickerProviderStateMixin {
                                   decoration: TextDecoration.underline)),
                         ],
                       )),
-
-                  onTap: (){
+                  onTap: () {
                     _launchCaller(widget.model!.mobile!);
-                  }
-              ),
+                  }),
             ])));
   }
 
@@ -703,7 +709,7 @@ class StateOrder extends State<OrderDetail> with TickerProviderStateMixin {
         child: Padding(
             padding: const EdgeInsets.fromLTRB(0, 15.0, 0, 15.0),
             child:
-            Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               Padding(
                   padding: const EdgeInsets.only(left: 15.0, right: 15.0),
                   child: Row(
@@ -713,26 +719,28 @@ class StateOrder extends State<OrderDetail> with TickerProviderStateMixin {
                               .textTheme
                               .subtitle2!
                               .copyWith(
-                              color: fontColor,
-                              fontWeight: FontWeight.bold)),
+                                  color: fontColor,
+                                  fontWeight: FontWeight.bold)),
                       const Spacer(),
-                      widget.model!.itemList![0].storeLatitude != "" &&
-                          widget.model!.itemList![0].storeLongitude != ""
+                      widget.model!.itemList != null &&
+                              widget.model!.itemList!.isNotEmpty &&
+                              widget.model!.itemList![0].storeLatitude != "" &&
+                              widget.model!.itemList![0].storeLongitude != ""
                           ? Container(
-                        height: 30,
-                        child: IconButton(
-                            icon: const Icon(
-                              Icons.location_on,
-                              color: fontColor,
-                            ),
-                            onPressed: () {
-                              _launchMap(
-                                  widget
-                                      .model!.itemList![0].storeLatitude,
-                                  widget.model!.itemList![0]
-                                      .storeLongitude);
-                            }),
-                      )
+                              height: 30,
+                              child: IconButton(
+                                  icon: const Icon(
+                                    Icons.location_on,
+                                    color: fontColor,
+                                  ),
+                                  onPressed: () {
+                                    _launchMap(
+                                        widget
+                                            .model!.itemList![0].storeLatitude,
+                                        widget.model!.itemList![0]
+                                            .storeLongitude);
+                                  }),
+                            )
                           : Container(),
                     ],
                   )),
@@ -741,61 +749,89 @@ class StateOrder extends State<OrderDetail> with TickerProviderStateMixin {
               ),
               Row(
                 children: [
-
                   Expanded(
                     child: ClipRRect(
                         borderRadius: BorderRadius.circular(10.0),
-                        child: widget.model!.itemList![0].storeImage! == null || widget.model!.itemList![0].storeImage! == "" ? Image.asset("assets/images/placeholder.png",height: 50,):FadeInImage(
-                          fadeInDuration: const Duration(milliseconds: 150),
-                          image: NetworkImage(widget.model!.itemList![0].storeImage!),
-                          height: 90.0,
-                          width: 90.0,
-                          placeholder: placeHolder(90),
-                        )),
+                        child: widget.model!.itemList != null &&
+                                widget.model!.itemList!.isNotEmpty &&
+                                (widget.model!.itemList![0].storeImage! ==
+                                        null ||
+                                    widget.model!.itemList![0].storeImage! ==
+                                        "")
+                            ? Image.asset(
+                                "assets/images/placeholder.png",
+                                height: 50,
+                              )
+                            : FadeInImage(
+                                fadeInDuration:
+                                    const Duration(milliseconds: 150),
+                                image: NetworkImage(widget.model!.itemList ==
+                                            null ||
+                                        widget.model!.itemList!.isEmpty
+                                    ? ''
+                                    : widget.model!.itemList![0].storeImage!),
+                                height: 90.0,
+                                width: 90.0,
+                                placeholder: placeHolder(90),
+                              )),
                   ),
                   Expanded(
                       child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
-                              padding:
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                          padding:
                               const EdgeInsets.only(left: 15.0, right: 15.0),
-                              child: Text(
-                                widget.model!.itemList![0].storeName != null &&
+                          child: Text(
+                            widget.model!.itemList != null &&
+                                    widget.model!.itemList!.isNotEmpty &&
+                                    widget.model!.itemList![0].storeName !=
+                                        null &&
                                     widget.model!.itemList![0].storeName!
                                         .isNotEmpty
-                                    ? " ${capitalize(widget.model!.itemList![0].storeName!)}"
-                                    : " ",
-                                style: TextStyle(fontWeight: FontWeight.bold),
-                              )),
-                          Padding(
+                                ? " ${capitalize(widget.model!.itemList![0].storeName!)}"
+                                : " ",
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          )),
+                      Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 15.0, vertical: 3),
+                          child: Text(
+                              widget.model!.itemList != null &&
+                                      widget.model!.itemList!.isNotEmpty
+                                  ? capitalize(widget
+                                      .model!.itemList![0].sellerAddress
+                                      .toString())
+                                  : " ",
+                              style: const TextStyle(color: lightBlack2))),
+                      InkWell(
+                          child: Padding(
                               padding: const EdgeInsets.symmetric(
-                                  horizontal: 15.0, vertical: 3),
-                              child: Text(capitalize(widget.model!.itemList![0].sellerAddress.toString()),
-                                  style: const TextStyle(color: lightBlack2))),
-                          InkWell(
-                              child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 15.0, vertical: 5),
-                                  child: Row(
-                                    children: [
-                                      const Icon(
-                                        Icons.call,
-                                        size: 15,
-                                        color: fontColor,
-                                      ),
-                                      Text(" ${widget.model!.itemList![0].sellerMobileNumber!}",
-                                          style: const TextStyle(
-                                              color: fontColor,
-                                              decoration: TextDecoration.underline)),
-                                    ],
-                                  )),
-                              onTap: (){
-                                _launchCaller(widget.model!.itemList![0].sellerMobileNumber!);
-                              }
-                          ),
-                        ],
-                      ))
+                                  horizontal: 15.0, vertical: 5),
+                              child: Row(
+                                children: [
+                                  const Icon(
+                                    Icons.call,
+                                    size: 15,
+                                    color: fontColor,
+                                  ),
+                                  Text(
+                                      widget.model!.itemList != null &&
+                                              widget.model!.itemList!.isNotEmpty
+                                          ? " ${widget.model!.itemList![0].sellerMobileNumber!}"
+                                          : "",
+                                      style: const TextStyle(
+                                          color: fontColor,
+                                          decoration:
+                                              TextDecoration.underline)),
+                                ],
+                              )),
+                          onTap: () {
+                            _launchCaller(
+                                widget.model!.itemList![0].sellerMobileNumber!);
+                          }),
+                    ],
+                  ))
                 ],
               ),
             ])));
@@ -837,42 +873,42 @@ class StateOrder extends State<OrderDetail> with TickerProviderStateMixin {
                                   .textTheme
                                   .subtitle1!
                                   .copyWith(
-                                  color: lightBlack,
-                                  fontWeight: FontWeight.normal),
+                                      color: lightBlack,
+                                      fontWeight: FontWeight.normal),
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
                             ),
                             orderItem.attr_name!.isNotEmpty
                                 ? ListView.builder(
-                                physics:
-                                const NeverScrollableScrollPhysics(),
-                                shrinkWrap: true,
-                                itemCount: att.length,
-                                itemBuilder: (context, index) {
-                                  return Row(children: [
-                                    Flexible(
-                                      child: Text(
-                                        att[index].trim() + ":",
-                                        overflow: TextOverflow.ellipsis,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .subtitle2!
-                                            .copyWith(color: lightBlack2),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding:
-                                      const EdgeInsets.only(left: 5.0),
-                                      child: Text(
-                                        val[index],
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .subtitle2!
-                                            .copyWith(color: lightBlack),
-                                      ),
-                                    )
-                                  ]);
-                                })
+                                    physics:
+                                        const NeverScrollableScrollPhysics(),
+                                    shrinkWrap: true,
+                                    itemCount: att.length,
+                                    itemBuilder: (context, index) {
+                                      return Row(children: [
+                                        Flexible(
+                                          child: Text(
+                                            att[index].trim() + ":",
+                                            overflow: TextOverflow.ellipsis,
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .subtitle2!
+                                                .copyWith(color: lightBlack2),
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(left: 5.0),
+                                          child: Text(
+                                            val[index],
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .subtitle2!
+                                                .copyWith(color: lightBlack),
+                                          ),
+                                        )
+                                      ]);
+                                    })
                                 : Container(),
                             Row(children: [
                               Text(
@@ -902,113 +938,113 @@ class StateOrder extends State<OrderDetail> with TickerProviderStateMixin {
                             ),
                             widget.model!.itemList!.length >= 1
                                 ? Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  vertical: 10.0),
-                              child: Row(
-                                children: [
-                                  Expanded(
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(
-                                          right: 8.0),
-                                      child: DropdownButtonFormField(
-                                        dropdownColor: lightWhite,
-                                        isDense: true,
-                                        iconEnabledColor: fontColor,
-                                        //iconSize: 40,
-                                        hint: Text(
-                                          "Update Status",
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .subtitle2!
-                                              .copyWith(
-                                              color: fontColor,
-                                              fontWeight:
-                                              FontWeight.bold),
-                                        ),
-                                        decoration: const InputDecoration(
-                                          filled: true,
-                                          isDense: true,
-                                          fillColor: lightWhite,
-                                          contentPadding:
-                                          EdgeInsets.symmetric(
-                                              vertical: 10,
-                                              horizontal: 10),
-                                          enabledBorder:
-                                          OutlineInputBorder(
-                                            borderSide: BorderSide(
-                                                color: fontColor),
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 10.0),
+                                    child: Row(
+                                      children: [
+                                        Expanded(
+                                          child: Padding(
+                                            padding: const EdgeInsets.only(
+                                                right: 8.0),
+                                            child: DropdownButtonFormField(
+                                              dropdownColor: lightWhite,
+                                              isDense: true,
+                                              iconEnabledColor: fontColor,
+                                              //iconSize: 40,
+                                              hint: Text(
+                                                "Update Status",
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .subtitle2!
+                                                    .copyWith(
+                                                        color: fontColor,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                              ),
+                                              decoration: const InputDecoration(
+                                                filled: true,
+                                                isDense: true,
+                                                fillColor: lightWhite,
+                                                contentPadding:
+                                                    EdgeInsets.symmetric(
+                                                        vertical: 10,
+                                                        horizontal: 10),
+                                                enabledBorder:
+                                                    OutlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                      color: fontColor),
+                                                ),
+                                              ),
+                                              value: orderItem.status,
+                                              onChanged: (dynamic newValue) {
+                                                setState(() {
+                                                  orderItem.curSelected =
+                                                      newValue;
+                                                });
+                                              },
+                                              items:
+                                                  statusList.map((String st) {
+                                                return DropdownMenuItem<String>(
+                                                  value: st,
+                                                  child: Text(
+                                                    capitalize(st),
+                                                    style: Theme.of(context)
+                                                        .textTheme
+                                                        .subtitle2!
+                                                        .copyWith(
+                                                            color: fontColor,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold),
+                                                  ),
+                                                );
+                                              }).toList(),
+                                            ),
                                           ),
                                         ),
-                                        value: orderItem.status,
-                                        onChanged: (dynamic newValue) {
-                                          setState(() {
-                                            orderItem.curSelected =
-                                                newValue;
-                                          });
-                                        },
-                                        items:
-                                        statusList.map((String st) {
-                                          return DropdownMenuItem<String>(
-                                            value: st,
-                                            child: Text(
-                                              capitalize(st),
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .subtitle2!
-                                                  .copyWith(
-                                                  color: fontColor,
-                                                  fontWeight:
-                                                  FontWeight
-                                                      .bold),
+                                        RawMaterialButton(
+                                          constraints:
+                                              const BoxConstraints.expand(
+                                                  width: 42, height: 42),
+                                          onPressed: () {
+                                            if (orderItem.item_otp != null &&
+                                                orderItem
+                                                    .item_otp!.isNotEmpty &&
+                                                orderItem.item_otp != "0" &&
+                                                orderItem.curSelected ==
+                                                    DELIVERD) {
+                                              otpDialog(
+                                                  orderItem.curSelected,
+                                                  orderItem.item_otp,
+                                                  model.id,
+                                                  true,
+                                                  i);
+                                            } else {
+                                              updateOrder(
+                                                  orderItem.curSelected,
+                                                  model.id,
+                                                  true,
+                                                  i,
+                                                  orderItem.item_otp);
+                                            }
+                                          },
+                                          elevation: 2.0,
+                                          fillColor: fontColor,
+                                          padding:
+                                              const EdgeInsets.only(left: 5),
+                                          child: const Align(
+                                            alignment: Alignment.center,
+                                            child: Icon(
+                                              Icons.send,
+                                              size: 20,
+                                              color: white,
                                             ),
-                                          );
-                                        }).toList(),
-                                      ),
+                                          ),
+                                          shape: const CircleBorder(),
+                                        )
+                                      ],
                                     ),
-                                  ),
-                                  RawMaterialButton(
-                                    constraints:
-                                    const BoxConstraints.expand(
-                                        width: 42, height: 42),
-                                    onPressed: () {
-                                      if (orderItem.item_otp != null &&
-                                          orderItem
-                                              .item_otp!.isNotEmpty &&
-                                          orderItem.item_otp != "0" &&
-                                          orderItem.curSelected ==
-                                              DELIVERD) {
-                                        otpDialog(
-                                            orderItem.curSelected,
-                                            orderItem.item_otp,
-                                            model.id,
-                                            true,
-                                            i);
-                                      } else {
-                                        updateOrder(
-                                            orderItem.curSelected,
-                                            model.id,
-                                            true,
-                                            i,
-                                            orderItem.item_otp);
-                                      }
-                                    },
-                                    elevation: 2.0,
-                                    fillColor: fontColor,
-                                    padding:
-                                    const EdgeInsets.only(left: 5),
-                                    child: const Align(
-                                      alignment: Alignment.center,
-                                      child: Icon(
-                                        Icons.send,
-                                        size: 20,
-                                        color: white,
-                                      ),
-                                    ),
-                                    shape: const CircleBorder(),
                                   )
-                                ],
-                              ),
-                            )
                                 : Container()
                           ],
                         ),
@@ -1035,12 +1071,14 @@ class StateOrder extends State<OrderDetail> with TickerProviderStateMixin {
           DEL_BOY_ID: CUR_USERID,
           OTP: otp
         };
-        if (item) parameter[ORDERITEMID] = widget.model!.itemList![index].id;
+        print("jhhhhhhhhhh_____${parameter}");
+        // if (item) parameter[ORDERITEMID] = widget.model!.itemList![index].id;
+        print("jhhhhhhhhhh_____${parameter}");
 
         print(parameter.toString());
         Response response =
-        await post(updateOrderItemApi, body: parameter, headers: headers)
-            .timeout(Duration(seconds: timeOut));
+            await post(updateOrderItemApi, body: parameter, headers: headers)
+                .timeout(Duration(seconds: timeOut));
 
         var getdata = json.decode(response.body);
         bool error = getdata["error"];
