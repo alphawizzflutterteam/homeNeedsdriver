@@ -680,6 +680,11 @@ class StateOrder extends State<OrderDetail> with TickerProviderStateMixin {
                       const EdgeInsets.symmetric(horizontal: 15.0, vertical: 3),
                   child: Text(capitalize(widget.model!.address!),
                       style: const TextStyle(color: lightBlack2))),
+              Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 15.0, vertical: 3),
+                  child: Text(capitalize(widget.model!.roomNumber!),
+                      style: const TextStyle(color: lightBlack2))),
               InkWell(
                   child: Padding(
                       padding: const EdgeInsets.symmetric(

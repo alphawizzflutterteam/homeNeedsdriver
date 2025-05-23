@@ -165,7 +165,6 @@ class _LoginPageState extends State<Login> with TickerProviderStateMixin {
 
       if (response.statusCode == 200) {
         var getdata = json.decode(response.body);
-
         bool error = getdata["error"];
         String? msg = getdata["message"];
         await buttonController!.reverse();

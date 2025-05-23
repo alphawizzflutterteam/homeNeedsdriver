@@ -12,8 +12,6 @@ import 'constant.dart';
 import 'constant.dart';
 import 'string.dart';
 
-
-
 setPrefrence(String key, String value) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   await prefs.setString(key, value);
@@ -82,7 +80,6 @@ getAppBar(String title, BuildContext context) {
     leading: Builder(builder: (BuildContext context) {
       return Container(
         margin: EdgeInsets.all(10),
-
         child: InkWell(
           borderRadius: BorderRadius.circular(4),
           onTap: () => Navigator.of(context).pop(),
@@ -133,7 +130,6 @@ noIntDec(BuildContext context) {
             )),
   );
 }
-
 
 Widget showCircularProgress(bool _isProgress, Color color) {
   if (_isProgress) {
@@ -205,14 +201,13 @@ String? validateUserName(String? value) {
 
 String? validateMob(String? value) {
   if (value!.isEmpty) {
-    return MOB_REQUIRED ;
+    return MOB_REQUIRED;
   }
   if (value.length < 9) {
     return VALID_MOB;
   }
   return null;
 }
-
 
 String? validatePass(String? value) {
   if (value!.length == 0)
@@ -224,13 +219,11 @@ String? validatePass(String? value) {
 }
 
 String? validateAltMob(String value) {
-  if (value.isNotEmpty) if (value.length <9) {
+  if (value.isNotEmpty) if (value.length < 9) {
     return VALID_MOB;
   }
   return null;
 }
-
-
 
 Widget getProgress() {
   return Center(child: CircularProgressIndicator());
@@ -239,7 +232,15 @@ Widget getProgress() {
 Widget getNoItem() {
   return Center(child: Text(noItem));
 }
-String capitalize(String s) => s[0].toUpperCase() + s.substring(1);
+
+// String capitalize(String s) => s[0].toUpperCase() + s.substring(1);
+String capitalize(String s) {
+  if (s == '') {
+    return '';
+  } else {
+    return s[0].toUpperCase() + s.substring(1);
+  }
+}
 
 Widget shimmer() {
   return Container(

@@ -68,10 +68,11 @@ class StateHome extends State<Home> with TickerProviderStateMixin {
   void initState() {
     offset = 0;
     total = 0;
+    getUserCurrentLocation();
+    getUserDetail();
     orderList.clear();
     getSetting();
-    getOrder();
-    getUserDetail();
+
     updateLetLongTimer();
 
     init();
@@ -567,7 +568,9 @@ class StateHome extends State<Home> with TickerProviderStateMixin {
         var parameter = {
           USER_ID: CUR_USERID,
           LIMIT: perPage.toString(),
-          OFFSET: offset.toString()
+          OFFSET: offset.toString(),
+          LATITUDE: lat ?? '',
+          LONGITUDE: long ?? '',
         };
         print("fgfgffgfdd__________${parameter}");
         if (activeStatus != null) {
@@ -582,7 +585,7 @@ class StateHome extends State<Home> with TickerProviderStateMixin {
         var getdata = json.decode(response.body);
         bool error = getdata["error"];
         String? msg = getdata["message"];
-        total = int.parse(getdata["total"]);
+        total = int.parse(getdata["total"].toString());
 
         if (!error) {
           if (offset! < total!) {
@@ -685,7 +688,7 @@ class StateHome extends State<Home> with TickerProviderStateMixin {
 
         request.fields.addAll({
           'user_id': CUR_USERID!,
-          'order_id': orderId, // replace with dynamic ORDER_ID if needed
+          'order_id': orderId,
           'status': status,
         });
 
@@ -1211,19 +1214,19 @@ orderList.clear();*/
   CollectionReference humanCollection =
       FirebaseFirestore.instance.collection("driverlocation");
 
-  Future<void> updateDriverLocation() async {
+  Future<void> updateDriverLocation(double latitude, double longitude) async {
     print("location store function Start===========");
 
     humanCollection.doc('$CUR_USERID').set({
-      'lat': currentLocation?.latitude,
-      'long': currentLocation?.longitude,
+      'lat': latitude,
+      'long': longitude,
     }, SetOptions(merge: true));
 
     print("location store success===========");
   }
 
-  var lat;
-  var long;
+  late String lat;
+  late String long;
 
   Position? currentLocation;
 
@@ -1237,44 +1240,45 @@ orderList.clear();*/
         if (mounted)
           setState(() {
             currentLocation = position;
-            lat = currentLocation?.latitude;
-            long = currentLocation?.longitude;
+            lat = currentLocation!.latitude.toString();
+            long = currentLocation!.longitude.toString();
           });
       });
+      getOrder();
 
-      updateDriverLocation();
+      //updateDriverLocation();
       // addData();
     } else if (status.isPermanentlyDenied) {
       openAppSettings();
     }
   }
+
   //
   // late Timer _timer;
   //
-  // void _startTimer() async {
-  //   final SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   CUR_USERID = await getPrefrence(ID);
-  //   _timer = Timer.periodic(Duration(minutes: 2), (timer) async {
-  //     await getUserCurrentLocation();
-  //   });
-  // }
+  void _startTimer() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    CUR_USERID = await getPrefrence(ID);
+    _timer = Timer.periodic(Duration(minutes: 2), (timer) async {
+      await getUserCurrentLocation();
+    });
+  }
 
   Timer? _timer;
   String? CUR_USERID;
 
-  // Update LetLong every minute
   void updateLetLongTimer() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    CUR_USERID = prefs.getString('id'); // Assuming 'id' is your key
+    CUR_USERID = prefs.getString('id');
 
-    _timer = Timer.periodic(Duration(minutes: 2), (timer) async {
+    _timer = Timer.periodic(Duration(minutes: 1), (timer) async {
       Position position = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.high,
       );
 
       double latitude = position.latitude;
       double longitude = position.longitude;
-
+      updateDriverLocation(latitude, longitude);
       await updateLatLongApi(latitude, longitude);
     });
   }

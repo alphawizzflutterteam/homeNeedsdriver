@@ -24,13 +24,12 @@ void main() async {
 
   FirebaseMessaging.onBackgroundMessage(myForgroundMessageHandler);
   FirebaseMessaging.instance.getToken().then((value) {
-    String  fcmToken = value!;
-
-
+    String fcmToken = value!;
     print("fcm is ${fcmToken}");
   });
   runApp(MyApp());
 }
+
 Future<void> _requestLocationPermission() async {
   // Check if the permission is already granted
   if (await Permission.location.isGranted) {
@@ -48,6 +47,7 @@ Future<void> _requestLocationPermission() async {
     // Handle the denial, for example, show a message or disable location-based features
   }
 }
+
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
 

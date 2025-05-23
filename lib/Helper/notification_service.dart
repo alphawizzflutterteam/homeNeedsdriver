@@ -6,17 +6,19 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 class LocalNotificationService {
   BuildContext? context;
   static final FlutterLocalNotificationsPlugin
-  _flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+      _flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
 
   static void initialize() async {
     const InitializationSettings initializationSettings =
-    InitializationSettings(
-        android: AndroidInitializationSettings("ic_launcher"),//@mipmap/ic_launcher
-        /*iOS: DarwinInitializationSettings()*/);
+        InitializationSettings(
+      android:
+          AndroidInitializationSettings("ic_launcher"), //@mipmap/ic_launcher
+      /*iOS: DarwinInitializationSettings()*/
+    );
     _flutterLocalNotificationsPlugin.initialize(initializationSettings);
 
     NotificationSettings settings =
-    await FirebaseMessaging.instance.requestPermission(
+        await FirebaseMessaging.instance.requestPermission(
       alert: true,
       announcement: false,
       badge: true,
@@ -33,28 +35,25 @@ class LocalNotificationService {
     );
 
     FirebaseMessaging.instance.getInitialMessage().then(
-          (message) {
+      (message) {
         print("FirebaseMessaging.instance.getInitialMessage");
-        if (message != null) {
-
-        }
+        if (message != null) {}
       },
     );
 
     FirebaseMessaging.onMessage.listen(
-          (message) {
+      (message) {
         print("FirebaseMessaging.onMessage______________");
         if (message.notification != null) {
-
-          display(message);
-
-          handleNotification(message.data);
+          // display(message);
+          //
+          // handleNotification(message.data);
         }
       },
     );
 
     FirebaseMessaging.onMessageOpenedApp.listen(
-          (message) {
+      (message) {
         print("FirebaseMessaging.onMessageOpenedApp___________");
         if (message.notification != null) {
           /* print('_____________${message.notification}______2_________');
@@ -81,8 +80,8 @@ class LocalNotificationService {
 
   static Future<void> handleNotification(Map<String, dynamic> message) async {
     final NotificationAppLaunchDetails? notificationAppLaunchDetails =
-    await _flutterLocalNotificationsPlugin
-        .getNotificationAppLaunchDetails();
+        await _flutterLocalNotificationsPlugin
+            .getNotificationAppLaunchDetails();
 
     if (notificationAppLaunchDetails?.didNotificationLaunchApp ?? false) {
       // App was opened from a notification
@@ -100,14 +99,12 @@ class LocalNotificationService {
       int id = random.nextInt(1000);
       const NotificationDetails notificationDetails = NotificationDetails(
           android: AndroidNotificationDetails(
-            "default_notification_channel",
-            "HomeNeeds",
-            importance: Importance.max,
-            priority: Priority.high,
-            playSound: true,
-            // sound: RawResourceAndroidNotificationSound('test'),
-            // icon: '@mipmap/ic_launcher'
-          ));
+              "default_notification_channel", "HomeNeeds",
+              importance: Importance.max,
+              priority: Priority.high,
+              playSound: true,
+              // sound: RawResourceAndroidNotificationSound('test'),
+              icon: '@mipmap/ic_launcher'));
       //print("my id is ${id.toString()}");
       await _flutterLocalNotificationsPlugin.show(
           id,
