@@ -20,7 +20,8 @@ class VerifyOtp extends StatefulWidget {
       {Key? key,
       required String this.mobileNumber,
       this.countryCode,
-      this.title, this.otp})
+      this.title,
+      this.otp})
       : super(key: key);
 
   @override
@@ -155,7 +156,7 @@ class _MobileOTPState extends State<VerifyOtp> with TickerProviderStateMixin {
                       SetPass(mobileNumber: widget.mobileNumber!)));
         });
       }
-    }else{
+    } else {
       print("OTP not match!!!");
     }
   }
@@ -274,7 +275,7 @@ class _MobileOTPState extends State<VerifyOtp> with TickerProviderStateMixin {
       flex: 4,
       child: Center(
         child: Image.asset(
-          'assets/images/splash.png',
+          'assets/images/loginlogo.png',
           color: primary,
         ),
       ),
@@ -340,7 +341,7 @@ class _MobileOTPState extends State<VerifyOtp> with TickerProviderStateMixin {
         ),
         child: Center(
             child: PinFieldAutoFill(
-                decoration:  UnderlineDecoration(
+                decoration: UnderlineDecoration(
                   textStyle: TextStyle(fontSize: 20, color: fontColor),
                   colorBuilder: FixedColorBuilder(primary),
                 ),
@@ -471,8 +472,9 @@ class _MobileOTPState extends State<VerifyOtp> with TickerProviderStateMixin {
       child: SizedBox(
         width: 100,
         height: 100,
-        child: SvgPicture.asset(
-          'assets/images/loginlogo.svg',
+        child: Image.asset(
+          'assets/images/loginlogo.png',
+          scale: .5,
         ),
       ),
     );

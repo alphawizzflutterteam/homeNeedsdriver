@@ -20,6 +20,7 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../Helper/notification_service.dart';
 import 'notification_lIst.dart';
 import 'order_detail.dart';
 import 'privacy_policy.dart';
@@ -72,13 +73,17 @@ class StateHome extends State<Home> with TickerProviderStateMixin {
     getUserDetail();
     orderList.clear();
     getSetting();
+    getOrder();
 
     updateLetLongTimer();
+    initNotification();
 
     init();
 
     final pushNotificationService = PushNotificationService(context: context);
-    pushNotificationService.initialise();
+    // pushNotificationService.initialise();
+    LocalNotificationService.initialize();
+    firebaseNotificationListener();
 
     buttonController = AnimationController(
         duration: Duration(milliseconds: 2000), vsync: this);
@@ -94,8 +99,18 @@ class StateHome extends State<Home> with TickerProviderStateMixin {
       ),
     ));
     controller.addListener(_scrollListener);
+    initNotification();
 
     super.initState();
+  }
+
+  void initNotification() {
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+      if (mounted) {
+        setState(() {});
+        getOrder();
+      }
+    });
   }
 
   @override
@@ -1026,6 +1041,15 @@ orderList.clear();*/
     }
   }
 
+  // _launchCaller() async {
+  //   const url = "tel:1234567890";
+  //   if (await canLaunch(url)) {
+  //     await launch(url);
+  //   } else {
+  //     throw 'Could not launch $url';
+  //   }
+  // }
+
   _detailHeader() {
     return Row(
       children: [
@@ -1309,6 +1333,12 @@ orderList.clear();*/
     } else {
       print("API Error: ${response.reasonPhrase}");
     }
+  }
+
+  void firebaseNotificationListener() {
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+      _refresh();
+    });
   }
 
 // updateCurrentLocation() {

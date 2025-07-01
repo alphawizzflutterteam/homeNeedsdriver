@@ -13,6 +13,7 @@ import 'package:flutter/rendering.dart';
 import 'package:http/http.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../livetracking.dart';
+import 'package:intl/intl.dart';
 
 class OrderDetail extends StatefulWidget {
   final Order_Model? model;
@@ -215,13 +216,25 @@ class StateOrder extends State<OrderDetail> with TickerProviderStateMixin {
                                                     .copyWith(
                                                         color: lightBlack2),
                                               ),
+                                              // Text(
+                                              //   model.dateTime!,
+                                              //   style: Theme.of(context)
+                                              //       .textTheme
+                                              //       .subtitle2!
+                                              //       .copyWith(
+                                              //           color: lightBlack2),
+                                              // ),
+
                                               Text(
-                                                model.orderDate!,
+                                                DateFormat('dd-MM-yy hh:mm a')
+                                                    .format(DateTime.parse(
+                                                        model.dateTime!)),
                                                 style: Theme.of(context)
                                                     .textTheme
                                                     .subtitle2!
                                                     .copyWith(
-                                                        color: lightBlack2),
+                                                      color: lightBlack2,
+                                                    ),
                                               ),
                                             ],
                                           ),
@@ -683,7 +696,7 @@ class StateOrder extends State<OrderDetail> with TickerProviderStateMixin {
               Padding(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 15.0, vertical: 3),
-                  child: Text(capitalize(widget.model!.roomNumber!),
+                  child: Text(capitalize(widget.model!.roomNumber ?? ''),
                       style: const TextStyle(color: lightBlack2))),
               InkWell(
                   child: Padding(
@@ -1069,6 +1082,7 @@ class StateOrder extends State<OrderDetail> with TickerProviderStateMixin {
         setState(() {
           _isProgress = true;
         });
+        CUR_USERID = await getPrefrence(ID);
 
         var parameter = {
           ORDERID: id,

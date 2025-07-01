@@ -11,6 +11,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart';
 
 class Profile extends StatefulWidget {
   @override
@@ -877,6 +878,16 @@ class StateProfile extends State<Profile> with TickerProviderStateMixin {
     );
   }
 
+  String formatDate(String dob) {
+    try {
+      final parsedDate = DateTime.parse(dob);
+      final formatted = DateFormat('dd-MM-yyyy').format(parsedDate);
+      return formatted;
+    } catch (e) {
+      return dob;
+    }
+  }
+
   genderAndDob() {
     return Container(
       child: FutureBuilder(
@@ -894,10 +905,17 @@ class StateProfile extends State<Profile> with TickerProviderStateMixin {
                   Divider(
                     color: Colors.black,
                   ),
+                  // ListTile(
+                  //   leading: Icon(Icons.date_range),
+                  //   title: Text("Date Of Birth"),
+                  //   subtitle: Text("${data[0].dob}"),
+                  // ),
                   ListTile(
                     leading: Icon(Icons.date_range),
                     title: Text("Date Of Birth"),
-                    subtitle: Text("${data[0].dob}"),
+                    subtitle: Text(
+                      formatDate(data[0].dob),
+                    ),
                   ),
                   Divider(
                     color: Colors.black,

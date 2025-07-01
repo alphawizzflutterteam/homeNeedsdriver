@@ -183,91 +183,203 @@ class _LoginPageState extends State<SetPass> with TickerProviderStateMixin {
     super.dispose();
   }
 
+  // Widget setPass() {
+  //   return Padding(
+  //       padding: const EdgeInsets.only(left: 25.0, right: 25.0, top: 30.0),
+  //       child: TextFormField(
+  //         keyboardType: TextInputType.text,
+  //         obscureText: true,
+  //         style: Theme.of(context)
+  //             .textTheme
+  //             .subtitle2!
+  //             .copyWith(color: fontColor, fontWeight: FontWeight.normal),
+  //         controller: passwordController,
+  //         validator: validatePass,
+  //         onSaved: (String? value) {
+  //           password = value;
+  //         },
+  //         decoration: InputDecoration(
+  //           prefixIcon: const Icon(
+  //             Icons.lock_outline,
+  //             color: fontColor,
+  //           ),
+  //           hintText: PASSHINT_LBL,
+  //           hintStyle: const TextStyle(
+  //               color: fontColor, fontWeight: FontWeight.normal),
+  //           // filled: true,
+  //           // fillColor: lightWhite,
+  //           contentPadding:
+  //               const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+  //           prefixIconConstraints:
+  //               const BoxConstraints(minWidth: 40, maxHeight: 25),
+  //           focusedBorder: OutlineInputBorder(
+  //             borderSide: const BorderSide(color: fontColor),
+  //             borderRadius: BorderRadius.circular(10.0),
+  //           ),
+  //           enabledBorder: UnderlineInputBorder(
+  //             borderSide: const BorderSide(color: lightBlack2),
+  //             borderRadius: BorderRadius.circular(10.0),
+  //           ),
+  //         ),
+  //       ));
+  // }
+  bool _obscureText = true; // Add this to your state
+
   Widget setPass() {
     return Padding(
-        padding: const EdgeInsets.only(left: 25.0, right: 25.0, top: 30.0),
-        child: TextFormField(
-          keyboardType: TextInputType.text,
-          obscureText: true,
-          style: Theme.of(context)
-              .textTheme
-              .subtitle2!
-              .copyWith(color: fontColor, fontWeight: FontWeight.normal),
-          controller: passwordController,
-          validator: validatePass,
-          onSaved: (String? value) {
-            password = value;
-          },
-          decoration: InputDecoration(
-            prefixIcon: const Icon(
-              Icons.lock_outline,
+      padding: const EdgeInsets.only(left: 25.0, right: 25.0, top: 30.0),
+      child: TextFormField(
+        keyboardType: TextInputType.text,
+        obscureText: _obscureText,
+        style: Theme.of(context)
+            .textTheme
+            .subtitle2!
+            .copyWith(color: fontColor, fontWeight: FontWeight.normal),
+        controller: passwordController,
+        validator: validatePass,
+        onSaved: (String? value) {
+          password = value;
+        },
+        decoration: InputDecoration(
+          prefixIcon: const Icon(
+            Icons.lock_outline,
+            color: fontColor,
+          ),
+          suffixIcon: IconButton(
+            icon: Icon(
+              _obscureText ? Icons.visibility_off : Icons.visibility,
               color: fontColor,
             ),
-            hintText: PASSHINT_LBL,
-            hintStyle: const TextStyle(
-                color: fontColor, fontWeight: FontWeight.normal),
-            // filled: true,
-            // fillColor: lightWhite,
-            contentPadding:
-                const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-            prefixIconConstraints:
-                const BoxConstraints(minWidth: 40, maxHeight: 25),
-            focusedBorder: OutlineInputBorder(
-              borderSide: const BorderSide(color: fontColor),
-              borderRadius: BorderRadius.circular(10.0),
-            ),
-            enabledBorder: UnderlineInputBorder(
-              borderSide: const BorderSide(color: lightBlack2),
-              borderRadius: BorderRadius.circular(10.0),
-            ),
+            onPressed: () {
+              setState(() {
+                _obscureText = !_obscureText;
+              });
+            },
           ),
-        ));
+          hintText: PASSHINT_LBL,
+          hintStyle:
+              const TextStyle(color: fontColor, fontWeight: FontWeight.normal),
+          contentPadding:
+              const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+          prefixIconConstraints:
+              const BoxConstraints(minWidth: 40, maxHeight: 25),
+          focusedBorder: OutlineInputBorder(
+            borderSide: const BorderSide(color: fontColor),
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+          enabledBorder: UnderlineInputBorder(
+            borderSide: const BorderSide(color: lightBlack2),
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+        ),
+      ),
+    );
   }
+
+  // Widget setConfirmpss() {
+  //   return Padding(
+  //       padding: const EdgeInsets.only(left: 25.0, right: 25.0, top: 20.0),
+  //       child: TextFormField(
+  //         keyboardType: TextInputType.text,
+  //         obscureText: true,
+  //         style: Theme.of(context)
+  //             .textTheme
+  //             .subtitle2!
+  //             .copyWith(color: fontColor, fontWeight: FontWeight.normal),
+  //         controller: confirmpassController,
+  //         validator: (value) {
+  //           if (value!.isEmpty) return CON_PASS_REQUIRED_MSG;
+  //           if (value != password) {
+  //             return CON_PASS_NOT_MATCH_MSG;
+  //           } else {
+  //             return null;
+  //           }
+  //         },
+  //         onSaved: (String? value) {
+  //           comfirmpass = value;
+  //         },
+  //         decoration: InputDecoration(
+  //           prefixIcon: const Icon(
+  //             Icons.lock_outline,
+  //             color: fontColor,
+  //           ),
+  //           hintText: CONFIRMPASSHINT_LBL,
+  //           hintStyle: const TextStyle(
+  //               color: fontColor, fontWeight: FontWeight.normal),
+  //           contentPadding:
+  //               const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+  //           prefixIconConstraints:
+  //               const BoxConstraints(minWidth: 40, maxHeight: 25),
+  //           focusedBorder: OutlineInputBorder(
+  //             borderSide: const BorderSide(color: fontColor),
+  //             borderRadius: BorderRadius.circular(10.0),
+  //           ),
+  //           enabledBorder: UnderlineInputBorder(
+  //             borderSide: BorderSide(color: lightBlack2),
+  //             borderRadius: BorderRadius.circular(10.0),
+  //           ),
+  //         ),
+  //       ));
+  // }
+
+  bool _obscureConfirmPass = true; // Add this to your State
 
   Widget setConfirmpss() {
     return Padding(
-        padding: const EdgeInsets.only(left: 25.0, right: 25.0, top: 20.0),
-        child: TextFormField(
-          keyboardType: TextInputType.text,
-          obscureText: true,
-          style: Theme.of(context)
-              .textTheme
-              .subtitle2!
-              .copyWith(color: fontColor, fontWeight: FontWeight.normal),
-          controller: confirmpassController,
-          validator: (value) {
-            if (value!.isEmpty) return CON_PASS_REQUIRED_MSG;
-            if (value != password) {
-              return CON_PASS_NOT_MATCH_MSG;
-            } else {
-              return null;
-            }
-          },
-          onSaved: (String? value) {
-            comfirmpass = value;
-          },
-          decoration: InputDecoration(
-            prefixIcon: const Icon(
-              Icons.lock_outline,
+      padding: const EdgeInsets.only(left: 25.0, right: 25.0, top: 20.0),
+      child: TextFormField(
+        keyboardType: TextInputType.text,
+        obscureText: _obscureConfirmPass,
+        style: Theme.of(context)
+            .textTheme
+            .subtitle2!
+            .copyWith(color: fontColor, fontWeight: FontWeight.normal),
+        controller: confirmpassController,
+        validator: (value) {
+          if (value!.isEmpty) return CON_PASS_REQUIRED_MSG;
+          if (value != password) {
+            return CON_PASS_NOT_MATCH_MSG;
+          } else {
+            return null;
+          }
+        },
+        onSaved: (String? value) {
+          comfirmpass = value;
+        },
+        decoration: InputDecoration(
+          prefixIcon: const Icon(
+            Icons.lock_outline,
+            color: fontColor,
+          ),
+          suffixIcon: IconButton(
+            icon: Icon(
+              _obscureConfirmPass ? Icons.visibility_off : Icons.visibility,
               color: fontColor,
             ),
-            hintText: CONFIRMPASSHINT_LBL,
-            hintStyle: const TextStyle(
-                color: fontColor, fontWeight: FontWeight.normal),
-            contentPadding:
-                const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-            prefixIconConstraints:
-                const BoxConstraints(minWidth: 40, maxHeight: 25),
-            focusedBorder: OutlineInputBorder(
-              borderSide: const BorderSide(color: fontColor),
-              borderRadius: BorderRadius.circular(10.0),
-            ),
-            enabledBorder: UnderlineInputBorder(
-              borderSide: BorderSide(color: lightBlack2),
-              borderRadius: BorderRadius.circular(10.0),
-            ),
+            onPressed: () {
+              setState(() {
+                _obscureConfirmPass = !_obscureConfirmPass;
+              });
+            },
           ),
-        ));
+          hintText: CONFIRMPASSHINT_LBL,
+          hintStyle:
+              const TextStyle(color: fontColor, fontWeight: FontWeight.normal),
+          contentPadding:
+              const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+          prefixIconConstraints:
+              const BoxConstraints(minWidth: 40, maxHeight: 25),
+          focusedBorder: OutlineInputBorder(
+            borderSide: const BorderSide(color: fontColor),
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+          enabledBorder: UnderlineInputBorder(
+            borderSide: BorderSide(color: lightBlack2),
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+        ),
+      ),
+    );
   }
 
   backBtn() {

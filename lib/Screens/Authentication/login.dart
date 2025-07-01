@@ -330,45 +330,99 @@ class _LoginPageState extends State<Login> with TickerProviderStateMixin {
     );
   }
 
+  // Widget setPass() {
+  //   return Container(
+  //       width: deviceWidth! * 0.8,
+  //       padding: EdgeInsets.only(top: 20.0),
+  //       child: TextFormField(
+  //         keyboardType: TextInputType.text,
+  //         obscureText: true,
+  //         focusNode: passFocus,
+  //         style: TextStyle(color: fontColor),
+  //         controller: passwordController,
+  //         validator: validatePass,
+  //         onSaved: (String? value) {
+  //           password = value;
+  //         },
+  //         decoration: InputDecoration(
+  //           prefixIcon: Icon(
+  //             Icons.lock_outline,
+  //             color: fontColor,
+  //             size: 17,
+  //           ),
+  //           hintText: PASSHINT_LBL,
+  //           hintStyle: Theme.of(this.context)
+  //               .textTheme
+  //               .subtitle2!
+  //               .copyWith(color: fontColor, fontWeight: FontWeight.normal),
+  //           // filled: true,
+  //           // fillColor: lightWhite,
+  //           contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+  //           prefixIconConstraints: BoxConstraints(minWidth: 40, maxHeight: 25),
+  //           focusedBorder: OutlineInputBorder(
+  //             borderSide: BorderSide(color: fontColor),
+  //             borderRadius: BorderRadius.circular(10.0),
+  //           ),
+  //           enabledBorder: UnderlineInputBorder(
+  //             borderSide: BorderSide(color: lightBlack2),
+  //             borderRadius: BorderRadius.circular(10.0),
+  //           ),
+  //         ),
+  //       ));
+  // }
+
+  bool _obscureText = true;
+
   Widget setPass() {
     return Container(
-        width: deviceWidth! * 0.8,
-        padding: EdgeInsets.only(top: 20.0),
-        child: TextFormField(
-          keyboardType: TextInputType.text,
-          obscureText: true,
-          focusNode: passFocus,
-          style: TextStyle(color: fontColor),
-          controller: passwordController,
-          validator: validatePass,
-          onSaved: (String? value) {
-            password = value;
-          },
-          decoration: InputDecoration(
-            prefixIcon: Icon(
-              Icons.lock_outline,
+      width: deviceWidth! * 0.8,
+      padding: EdgeInsets.only(top: 20.0),
+      child: TextFormField(
+        keyboardType: TextInputType.text,
+        obscureText: _obscureText,
+        focusNode: passFocus,
+        style: TextStyle(color: fontColor),
+        controller: passwordController,
+        validator: validatePass,
+        onSaved: (String? value) {
+          password = value;
+        },
+        decoration: InputDecoration(
+          prefixIcon: Icon(
+            Icons.lock_outline,
+            color: fontColor,
+            size: 17,
+          ),
+          suffixIcon: IconButton(
+            icon: Icon(
+              _obscureText ? Icons.visibility_off : Icons.visibility,
               color: fontColor,
               size: 17,
             ),
-            hintText: PASSHINT_LBL,
-            hintStyle: Theme.of(this.context)
-                .textTheme
-                .subtitle2!
-                .copyWith(color: fontColor, fontWeight: FontWeight.normal),
-            // filled: true,
-            // fillColor: lightWhite,
-            contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-            prefixIconConstraints: BoxConstraints(minWidth: 40, maxHeight: 25),
-            focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: fontColor),
-              borderRadius: BorderRadius.circular(10.0),
-            ),
-            enabledBorder: UnderlineInputBorder(
-              borderSide: BorderSide(color: lightBlack2),
-              borderRadius: BorderRadius.circular(10.0),
-            ),
+            onPressed: () {
+              setState(() {
+                _obscureText = !_obscureText;
+              });
+            },
           ),
-        ));
+          hintText: PASSHINT_LBL,
+          hintStyle: Theme.of(context)
+              .textTheme
+              .subtitle2!
+              .copyWith(color: fontColor, fontWeight: FontWeight.normal),
+          contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+          prefixIconConstraints: BoxConstraints(minWidth: 40, maxHeight: 25),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: fontColor),
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+          enabledBorder: UnderlineInputBorder(
+            borderSide: BorderSide(color: lightBlack2),
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+        ),
+      ),
+    );
   }
 
   Widget forgetPass() {

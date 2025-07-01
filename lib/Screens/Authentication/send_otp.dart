@@ -150,11 +150,11 @@ class _SendOtpState extends State<SendOtp> with TickerProviderStateMixin {
       print(data);
       print(getdata);
 
-      if(widget.checkOtp == "false"){
+      if (widget.checkOtp == "false") {
         if (widget.title == SEND_OTP_TITLE) {
           if (!error!) {
             int otp = getdata["data"]["otp"];
-            setSnackbar(otp.toString());
+            // setSnackbar(otp.toString());
             // setSnackbar(msg!);
             setPrefrence(MOBILE, mobile!);
             setPrefrence(COUNTRY_CODE, countrycode!);
@@ -163,11 +163,11 @@ class _SendOtpState extends State<SendOtp> with TickerProviderStateMixin {
                   context,
                   MaterialPageRoute(
                       builder: (context) => VerifyOtp(
-                        otp: otp,
-                        mobileNumber: mobile!,
-                        countryCode: countrycode,
-                        title: SEND_OTP_TITLE,
-                      )));
+                            otp: otp,
+                            mobileNumber: mobile!,
+                            countryCode: countrycode,
+                            title: SEND_OTP_TITLE,
+                          )));
             });
           } else {
             setSnackbar(msg!);
@@ -178,12 +178,12 @@ class _SendOtpState extends State<SendOtp> with TickerProviderStateMixin {
           if (!error!) {
             int otp = getdata["data"]["otp"];
             Fluttertoast.showToast(
-                msg: otp.toString(),
-                toastLength: Toast.LENGTH_SHORT,
-                gravity: ToastGravity.BOTTOM,
-                timeInSecForIosWeb: 1,
-                backgroundColor: primary,
-                textColor: Colors.white,
+              msg: otp.toString(),
+              toastLength: Toast.LENGTH_SHORT,
+              gravity: ToastGravity.BOTTOM,
+              timeInSecForIosWeb: 1,
+              backgroundColor: primary,
+              textColor: Colors.white,
             );
             // setSnackbar("${otp.toString()}");
             setPrefrence(MOBILE, mobile!);
@@ -192,17 +192,16 @@ class _SendOtpState extends State<SendOtp> with TickerProviderStateMixin {
                 context,
                 MaterialPageRoute(
                     builder: (context) => VerifyOtp(
-                      otp: otp,
-                      mobileNumber: mobile!,
-                      countryCode: countrycode,
-                      title: FORGOT_PASS_TITLE,
-                    )));
+                          otp: otp,
+                          mobileNumber: mobile!,
+                          countryCode: countrycode,
+                          title: FORGOT_PASS_TITLE,
+                        )));
           } else {
             setSnackbar(msg!);
           }
         }
       }
-
     } on TimeoutException catch (_) {
       setSnackbar(somethingMSg);
       await buttonController!.reverse();
@@ -281,9 +280,7 @@ class _SendOtpState extends State<SendOtp> with TickerProviderStateMixin {
         initialSelection: 'IN',
         dialogSize: Size(width, height),
         alignLeft: true,
-        textStyle: TextStyle(
-            color: fontColor,
-            fontWeight: FontWeight.bold),
+        textStyle: TextStyle(color: fontColor, fontWeight: FontWeight.bold),
         onChanged: (CountryCode countryCode) {
           countrycode = countryCode.toString().replaceFirst("+", "");
           countryName = countryCode.name;
@@ -295,7 +292,7 @@ class _SendOtpState extends State<SendOtp> with TickerProviderStateMixin {
 
   setMono() {
     return TextFormField(
-      maxLength: 10,
+        maxLength: 10,
         keyboardType: TextInputType.number,
         controller: mobileController,
         style: Theme.of(context)
@@ -325,14 +322,29 @@ class _SendOtpState extends State<SendOtp> with TickerProviderStateMixin {
         ));
   }
 
+  // Widget verifyBtn() {
+  //   return AppBtn(
+  //       title: widget.title == SEND_OTP_TITLE ? SEND_OTP : GET_PASSWORD,
+  //       btnAnim: buttonSqueezeanimation,
+  //       btnCntrl: buttonController,
+  //       onBtnSelected: () async {
+  //         validateAndSubmit();
+  //       });
+  // }
   Widget verifyBtn() {
     return AppBtn(
-        title: widget.title == SEND_OTP_TITLE ? SEND_OTP : GET_PASSWORD,
-        btnAnim: buttonSqueezeanimation,
-        btnCntrl: buttonController,
-        onBtnSelected: () async {
-          validateAndSubmit();
-        });
+      title: widget.title == SEND_OTP_TITLE ? SEND_OTP : GET_PASSWORD,
+      btnAnim: buttonSqueezeanimation,
+      btnCntrl: buttonController,
+      onBtnSelected: () async {
+        if (mobileController.text.trim().length != 10) {
+          setSnackbar("Please enter a valid 10 digit mobile number");
+          await buttonController!.reverse();
+          return;
+        }
+        validateAndSubmit();
+      },
+    );
   }
 
   Widget termAndPolicyTxt() {
@@ -577,6 +589,7 @@ class _SendOtpState extends State<SendOtp> with TickerProviderStateMixin {
         height: 100,
         child: Image.asset(
           'assets/images/loginlogo.png',
+          scale: .5,
         ),
       ),
     );
