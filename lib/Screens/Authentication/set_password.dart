@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
+
 import 'package:deliveryboy_multivendor/Helper/Session.dart';
 import 'package:deliveryboy_multivendor/Helper/app_btn.dart';
 import 'package:deliveryboy_multivendor/Helper/color.dart';
@@ -8,7 +9,6 @@ import 'package:deliveryboy_multivendor/Helper/constant.dart';
 import 'package:deliveryboy_multivendor/Helper/cropped_container.dart';
 import 'package:deliveryboy_multivendor/Helper/string.dart';
 import 'package:deliveryboy_multivendor/Screens/Authentication/login.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -165,7 +165,7 @@ class _LoginPageState extends State<SetPass> with TickerProviderStateMixin {
             SET_NEW_PASSWORD,
             style: Theme.of(context)
                 .textTheme
-                .headline5!
+                .headlineSmall!
                 .copyWith(color: primary, fontWeight: FontWeight.bold),
           ),
         ));
@@ -233,7 +233,7 @@ class _LoginPageState extends State<SetPass> with TickerProviderStateMixin {
         obscureText: _obscureText,
         style: Theme.of(context)
             .textTheme
-            .subtitle2!
+            .titleSmall!
             .copyWith(color: fontColor, fontWeight: FontWeight.normal),
         controller: passwordController,
         validator: validatePass,
@@ -332,7 +332,7 @@ class _LoginPageState extends State<SetPass> with TickerProviderStateMixin {
         obscureText: _obscureConfirmPass,
         style: Theme.of(context)
             .textTheme
-            .subtitle2!
+            .titleSmall!
             .copyWith(color: fontColor, fontWeight: FontWeight.normal),
         controller: confirmpassController,
         validator: (value) {

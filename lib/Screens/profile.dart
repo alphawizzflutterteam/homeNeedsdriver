@@ -1,15 +1,14 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
+
 import 'package:deliveryboy_multivendor/Helper/Session.dart';
 import 'package:deliveryboy_multivendor/Helper/app_btn.dart';
 import 'package:deliveryboy_multivendor/Helper/color.dart';
 import 'package:deliveryboy_multivendor/Helper/constant.dart';
 import 'package:deliveryboy_multivendor/Helper/string.dart';
 import 'package:deliveryboy_multivendor/Model/GetBoUpdateModel.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 
@@ -614,7 +613,7 @@ class StateProfile extends State<Profile> with TickerProviderStateMixin {
                   CHANGE_PASS_LBL,
                   style: Theme.of(this.context)
                       .textTheme
-                      .subtitle2!
+                      .titleSmall!
                       .copyWith(color: fontColor, fontWeight: FontWeight.bold),
                 ),
               ),
@@ -646,7 +645,7 @@ class StateProfile extends State<Profile> with TickerProviderStateMixin {
                               CHANGE_PASS_LBL,
                               style: Theme.of(this.context)
                                   .textTheme
-                                  .subtitle1!
+                                  .titleMedium!
                                   .copyWith(color: fontColor),
                             )),
                         Divider(color: lightBlack),
@@ -666,7 +665,7 @@ class StateProfile extends State<Profile> with TickerProviderStateMixin {
                                           hintText: CUR_PASS_LBL,
                                           hintStyle: Theme.of(this.context)
                                               .textTheme
-                                              .subtitle1!
+                                              .titleMedium!
                                               .copyWith(
                                                   color: lightBlack,
                                                   fontWeight:
@@ -702,7 +701,7 @@ class StateProfile extends State<Profile> with TickerProviderStateMixin {
                                           hintText: NEW_PASS_LBL,
                                           hintStyle: Theme.of(this.context)
                                               .textTheme
-                                              .subtitle1!
+                                              .titleMedium!
                                               .copyWith(
                                                   color: lightBlack,
                                                   fontWeight:
@@ -745,7 +744,7 @@ class StateProfile extends State<Profile> with TickerProviderStateMixin {
                                           hintText: CONFIRMPASSHINT_LBL,
                                           hintStyle: Theme.of(this.context)
                                               .textTheme
-                                              .subtitle1!
+                                              .titleMedium!
                                               .copyWith(
                                                   color: lightBlack,
                                                   fontWeight:
@@ -778,7 +777,7 @@ class StateProfile extends State<Profile> with TickerProviderStateMixin {
                       CANCEL,
                       style: Theme.of(this.context)
                           .textTheme
-                          .subtitle2!
+                          .titleSmall!
                           .copyWith(
                               color: lightBlack, fontWeight: FontWeight.bold),
                     ),
@@ -790,7 +789,7 @@ class StateProfile extends State<Profile> with TickerProviderStateMixin {
                       SAVE_LBL,
                       style: Theme.of(this.context)
                           .textTheme
-                          .subtitle2!
+                          .titleSmall!
                           .copyWith(
                               color: fontColor, fontWeight: FontWeight.bold),
                     ),

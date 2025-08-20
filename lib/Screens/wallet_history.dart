@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+
 import 'package:deliveryboy_multivendor/Helper/Session.dart';
 import 'package:deliveryboy_multivendor/Helper/app_btn.dart';
 import 'package:deliveryboy_multivendor/Helper/color.dart';
@@ -7,10 +8,8 @@ import 'package:deliveryboy_multivendor/Helper/constant.dart';
 import 'package:deliveryboy_multivendor/Helper/sim_btn.dart';
 import 'package:deliveryboy_multivendor/Helper/string.dart';
 import 'package:deliveryboy_multivendor/Model/transaction_model.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
-
 
 class WalletHistory extends StatefulWidget {
   @override
@@ -60,7 +59,6 @@ class StateWallet extends State<WalletHistory> with TickerProviderStateMixin {
   }
 
   @override
-
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: lightWhite,
@@ -95,7 +93,7 @@ class StateWallet extends State<WalletHistory> with TickerProviderStateMixin {
                                         " " + CURBAL_LBL,
                                         style: Theme.of(context)
                                             .textTheme
-                                            .subtitle2!
+                                            .titleSmall!
                                             .copyWith(
                                                 color: fontColor,
                                                 fontWeight: FontWeight.bold),
@@ -105,7 +103,7 @@ class StateWallet extends State<WalletHistory> with TickerProviderStateMixin {
                                   Text(CUR_CURRENCY! + " " + CUR_BALANCE,
                                       style: Theme.of(context)
                                           .textTheme
-                                          .headline6!
+                                          .titleLarge!
                                           .copyWith(
                                               color: fontColor,
                                               fontWeight: FontWeight.bold)),
@@ -166,7 +164,7 @@ class StateWallet extends State<WalletHistory> with TickerProviderStateMixin {
           setSnackbar(msg);
           print("we are here");
           setState(
-                () {
+            () {
               _isLoading = true;
             },
           );
@@ -223,7 +221,6 @@ class StateWallet extends State<WalletHistory> with TickerProviderStateMixin {
             child: InkWell(
               borderRadius: BorderRadius.circular(4),
               onTap: () {
-
                 _refresh();
               },
               child: Icon(
@@ -267,14 +264,14 @@ class StateWallet extends State<WalletHistory> with TickerProviderStateMixin {
                       padding: EdgeInsets.only(top: 19.0, bottom: 16.0),
                       child: Text(
                         FILTER_BY,
-                        style: Theme.of(context).textTheme.headline6,
+                        style: Theme.of(context).textTheme.titleLarge,
                       )),
                   Divider(color: lightBlack),
                   TextButton(
                       child: Text(SHOW_TRANS,
                           style: Theme.of(context)
                               .textTheme
-                              .subtitle1!
+                              .titleMedium!
                               .copyWith(color: lightBlack)),
                       onPressed: () {
                         tranList.clear();
@@ -291,7 +288,7 @@ class StateWallet extends State<WalletHistory> with TickerProviderStateMixin {
                       child: Text(SHOW_REQ,
                           style: Theme.of(context)
                               .textTheme
-                              .subtitle1!
+                              .titleMedium!
                               .copyWith(color: lightBlack)),
                       onPressed: () {
                         tranList.clear();
@@ -333,7 +330,7 @@ class StateWallet extends State<WalletHistory> with TickerProviderStateMixin {
                               SEND_REQUEST,
                               style: Theme.of(this.context)
                                   .textTheme
-                                  .subtitle1!
+                                  .titleMedium!
                                   .copyWith(color: fontColor),
                             )),
                         Divider(color: lightBlack),
@@ -353,7 +350,7 @@ class StateWallet extends State<WalletHistory> with TickerProviderStateMixin {
                                         hintText: WITHDRWAL_AMT,
                                         hintStyle: Theme.of(this.context)
                                             .textTheme
-                                            .subtitle1!
+                                            .titleMedium!
                                             .copyWith(
                                                 color: lightBlack,
                                                 fontWeight: FontWeight.normal),
@@ -373,7 +370,7 @@ class StateWallet extends State<WalletHistory> with TickerProviderStateMixin {
                                         hintText: BANK_DETAIL,
                                         hintStyle: Theme.of(this.context)
                                             .textTheme
-                                            .subtitle1!
+                                            .titleMedium!
                                             .copyWith(
                                                 color: lightBlack,
                                                 fontWeight: FontWeight.normal),
@@ -389,7 +386,7 @@ class StateWallet extends State<WalletHistory> with TickerProviderStateMixin {
                       CANCEL,
                       style: Theme.of(this.context)
                           .textTheme
-                          .subtitle2!
+                          .titleSmall!
                           .copyWith(
                               color: lightBlack, fontWeight: FontWeight.bold),
                     ),
@@ -401,7 +398,7 @@ class StateWallet extends State<WalletHistory> with TickerProviderStateMixin {
                       SEND_LBL,
                       style: Theme.of(this.context)
                           .textTheme
-                          .subtitle2!
+                          .titleSmall!
                           .copyWith(
                               color: fontColor, fontWeight: FontWeight.bold),
                     ),
@@ -668,12 +665,13 @@ class StateWallet extends State<WalletHistory> with TickerProviderStateMixin {
   Future<Null> _refresh() async {
     Completer<Null> completer = new Completer<Null>();
     await Future.delayed(Duration(seconds: 1)).then(
-          (onvalue) {
+      (onvalue) {
         completer.complete();
         offset = 0;
         total = 0;
         tranList.clear();
-        setState(() {
+        setState(
+          () {
             _isLoading = true;
           },
         );
