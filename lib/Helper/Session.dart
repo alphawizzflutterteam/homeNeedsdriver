@@ -1,14 +1,10 @@
-import 'package:connectivity/connectivity.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:jaguar_jwt/jaguar_jwt.dart';
-
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shimmer/shimmer.dart';
 
 import 'color.dart';
-import 'constant.dart';
 import 'constant.dart';
 import 'string.dart';
 
@@ -115,7 +111,7 @@ noIntText(BuildContext context) {
       child: Text(NO_INTERNET,
           style: Theme.of(context)
               .textTheme
-              .headline5!
+              .headlineSmall!
               .copyWith(color: primary, fontWeight: FontWeight.normal)));
 }
 
@@ -124,7 +120,7 @@ noIntDec(BuildContext context) {
     padding: EdgeInsets.only(top: 30.0, left: 30.0, right: 30.0),
     child: Text(NO_INTERNET_DISC,
         textAlign: TextAlign.center,
-        style: Theme.of(context).textTheme.headline6!.copyWith(
+        style: Theme.of(context).textTheme.titleLarge!.copyWith(
               color: lightBlack2,
               fontWeight: FontWeight.normal,
             )),

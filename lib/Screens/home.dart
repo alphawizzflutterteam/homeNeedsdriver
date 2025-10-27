@@ -12,9 +12,9 @@ import 'package:deliveryboy_multivendor/Model/GetBoUpdateModel.dart';
 import 'package:deliveryboy_multivendor/Model/order_model.dart';
 import 'package:deliveryboy_multivendor/Screens/Authentication/login.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -26,7 +26,6 @@ import 'order_detail.dart';
 import 'privacy_policy.dart';
 import 'profile.dart';
 import 'wallet_history.dart';
-import 'package:http/http.dart' as http;
 
 class Home extends StatefulWidget {
   @override
@@ -202,7 +201,7 @@ class StateHome extends State<Home> with TickerProviderStateMixin {
                           'Filter By',
                           style: Theme.of(context)
                               .textTheme
-                              .headline6!
+                              .titleLarge!
                               .copyWith(color: fontColor),
                         )),
                     Divider(color: lightBlack),
@@ -233,7 +232,7 @@ class StateHome extends State<Home> with TickerProviderStateMixin {
                       child: Text(capitalize(statusList[index]),
                           style: Theme.of(context)
                               .textTheme
-                              .subtitle1!
+                              .titleMedium!
                               .copyWith(color: lightBlack)),
                       onPressed: () {
                         setState(() {
@@ -321,13 +320,13 @@ class StateHome extends State<Home> with TickerProviderStateMixin {
                       CUR_USERNAME!,
                       style: Theme.of(context)
                           .textTheme
-                          .subtitle1!
+                          .titleMedium!
                           .copyWith(color: white, fontWeight: FontWeight.bold),
                     ),
                     Text("$WALLET_BAL: ${CUR_CURRENCY!}$CUR_BALANCE",
                         style: Theme.of(context)
                             .textTheme
-                            .caption!
+                            .bodySmall!
                             .copyWith(color: white)),
                     Padding(
                         padding: const EdgeInsets.only(
@@ -339,7 +338,7 @@ class StateHome extends State<Home> with TickerProviderStateMixin {
                             Text(EDIT_PROFILE_LBL,
                                 style: Theme.of(context)
                                     .textTheme
-                                    .caption!
+                                    .bodySmall!
                                     .copyWith(color: white)),
                             const Icon(
                               Icons.arrow_right_outlined,
@@ -496,7 +495,7 @@ class StateHome extends State<Home> with TickerProviderStateMixin {
                 LOGOUTTXT,
                 style: Theme.of(this.context)
                     .textTheme
-                    .subtitle1!
+                    .titleMedium!
                     .copyWith(color: fontColor),
               ),
               actions: <Widget>[
@@ -505,7 +504,7 @@ class StateHome extends State<Home> with TickerProviderStateMixin {
                       LOGOUTNO,
                       style: Theme.of(this.context)
                           .textTheme
-                          .subtitle2!
+                          .titleSmall!
                           .copyWith(
                               color: lightBlack, fontWeight: FontWeight.bold),
                     ),
@@ -517,7 +516,7 @@ class StateHome extends State<Home> with TickerProviderStateMixin {
                       LOGOUTYES,
                       style: Theme.of(this.context)
                           .textTheme
-                          .subtitle2!
+                          .titleSmall!
                           .copyWith(
                               color: fontColor, fontWeight: FontWeight.bold),
                     ),

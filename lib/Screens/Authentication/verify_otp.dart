@@ -1,4 +1,5 @@
 import 'dart:async';
+
 import 'package:deliveryboy_multivendor/Helper/Session.dart';
 import 'package:deliveryboy_multivendor/Helper/app_btn.dart';
 import 'package:deliveryboy_multivendor/Helper/color.dart';
@@ -8,8 +9,8 @@ import 'package:deliveryboy_multivendor/Helper/string.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:sms_autofill/sms_autofill.dart';
+
 import 'set_password.dart';
 
 class VerifyOtp extends StatefulWidget {
@@ -302,7 +303,7 @@ class _MobileOTPState extends State<VerifyOtp> with TickerProviderStateMixin {
           child: Text(MOBILE_NUMBER_VARIFICATION,
               style: Theme.of(context)
                   .textTheme
-                  .headline5!
+                  .headlineSmall!
                   .copyWith(color: primary, fontWeight: FontWeight.bold)),
         ));
   }
@@ -314,7 +315,7 @@ class _MobileOTPState extends State<VerifyOtp> with TickerProviderStateMixin {
           child: Text(SENT_VERIFY_CODE_TO_NO_LBL,
               style: Theme.of(context)
                   .textTheme
-                  .subtitle2!
+                  .titleSmall!
                   .copyWith(color: fontColor, fontWeight: FontWeight.normal)),
         ));
   }
@@ -327,7 +328,7 @@ class _MobileOTPState extends State<VerifyOtp> with TickerProviderStateMixin {
         child: Text("+$countrycode-$mobile",
             style: Theme.of(context)
                 .textTheme
-                .subtitle1!
+                .titleMedium!
                 .copyWith(color: fontColor, fontWeight: FontWeight.normal)),
       ),
     );
@@ -366,7 +367,7 @@ class _MobileOTPState extends State<VerifyOtp> with TickerProviderStateMixin {
             DIDNT_GET_THE_CODE,
             style: Theme.of(context)
                 .textTheme
-                .caption!
+                .bodySmall!
                 .copyWith(color: fontColor, fontWeight: FontWeight.normal),
           ),
           InkWell(
@@ -376,7 +377,7 @@ class _MobileOTPState extends State<VerifyOtp> with TickerProviderStateMixin {
               },
               child: Text(
                 RESEND_OTP,
-                style: Theme.of(context).textTheme.caption!.copyWith(
+                style: Theme.of(context).textTheme.bodySmall!.copyWith(
                     color: fontColor,
                     decoration: TextDecoration.underline,
                     fontWeight: FontWeight.normal),

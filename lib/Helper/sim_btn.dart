@@ -13,8 +13,7 @@ class SimBtn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    size=MediaQuery.of(context).size.width *size!;
+    size = MediaQuery.of(context).size.width * size!;
     return _buildBtnAnimation(context);
   }
 
@@ -37,7 +36,7 @@ class SimBtn extends StatelessWidget {
               textAlign: TextAlign.center,
               style: Theme.of(context)
                   .textTheme
-                  .subtitle1!
+                  .titleMedium!
                   .copyWith(color: white, fontWeight: FontWeight.normal))),
       onPressed: () {
         onBtnSelected!();

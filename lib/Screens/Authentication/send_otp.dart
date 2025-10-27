@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
+
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:deliveryboy_multivendor/Helper/Session.dart';
 import 'package:deliveryboy_multivendor/Helper/app_btn.dart';
@@ -8,12 +9,11 @@ import 'package:deliveryboy_multivendor/Helper/color.dart';
 import 'package:deliveryboy_multivendor/Helper/constant.dart';
 import 'package:deliveryboy_multivendor/Helper/cropped_container.dart';
 import 'package:deliveryboy_multivendor/Helper/string.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart';
+
 import '../privacy_policy.dart';
 import 'verify_otp.dart';
 
@@ -220,7 +220,7 @@ class _SendOtpState extends State<SendOtp> with TickerProviderStateMixin {
                 : FORGOT_PASSWORDTITILE,
             style: Theme.of(context)
                 .textTheme
-                .headline5!
+                .headlineSmall!
                 .copyWith(color: primary, fontWeight: FontWeight.bold),
           ),
         ));
@@ -235,7 +235,7 @@ class _SendOtpState extends State<SendOtp> with TickerProviderStateMixin {
           child: Text(
             SEND_VERIFY_CODE_LBL,
             textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.subtitle2!.copyWith(
+            style: Theme.of(context).textTheme.titleSmall!.copyWith(
                   color: fontColor,
                   fontWeight: FontWeight.normal,
                 ),
@@ -298,7 +298,7 @@ class _SendOtpState extends State<SendOtp> with TickerProviderStateMixin {
         controller: mobileController,
         style: Theme.of(context)
             .textTheme
-            .subtitle2!
+            .titleSmall!
             .copyWith(color: fontColor, fontWeight: FontWeight.normal),
         inputFormatters: [FilteringTextInputFormatter.digitsOnly],
         validator: validateMob,
@@ -310,7 +310,7 @@ class _SendOtpState extends State<SendOtp> with TickerProviderStateMixin {
           hintText: MOBILEHINT_LBL,
           hintStyle: Theme.of(context)
               .textTheme
-              .subtitle2!
+              .titleSmall!
               .copyWith(color: fontColor, fontWeight: FontWeight.normal),
           contentPadding:
               const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
@@ -357,7 +357,7 @@ class _SendOtpState extends State<SendOtp> with TickerProviderStateMixin {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Text(CONTINUE_AGREE_LBL,
-                    style: Theme.of(context).textTheme.caption!.copyWith(
+                    style: Theme.of(context).textTheme.bodySmall!.copyWith(
                         color: fontColor, fontWeight: FontWeight.normal)),
                 const SizedBox(
                   height: 3.0,
@@ -374,7 +374,7 @@ class _SendOtpState extends State<SendOtp> with TickerProviderStateMixin {
                       },
                       child: Text(
                         TERMS_SERVICE_LBL,
-                        style: Theme.of(context).textTheme.caption!.copyWith(
+                        style: Theme.of(context).textTheme.bodySmall!.copyWith(
                             color: fontColor,
                             decoration: TextDecoration.underline,
                             fontWeight: FontWeight.normal),
@@ -383,7 +383,7 @@ class _SendOtpState extends State<SendOtp> with TickerProviderStateMixin {
                     width: 5.0,
                   ),
                   Text(AND_LBL,
-                      style: Theme.of(context).textTheme.caption!.copyWith(
+                      style: Theme.of(context).textTheme.bodySmall!.copyWith(
                           color: fontColor, fontWeight: FontWeight.normal)),
                   const SizedBox(
                     width: 5.0,
@@ -399,7 +399,7 @@ class _SendOtpState extends State<SendOtp> with TickerProviderStateMixin {
                       },
                       child: Text(
                         PRIVACY_POLICY_LBL,
-                        style: Theme.of(context).textTheme.caption!.copyWith(
+                        style: Theme.of(context).textTheme.bodySmall!.copyWith(
                             color: fontColor,
                             decoration: TextDecoration.underline,
                             fontWeight: FontWeight.normal),
