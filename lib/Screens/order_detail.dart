@@ -1,19 +1,17 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
+
 import 'package:deliveryboy_multivendor/Helper/Session.dart';
 import 'package:deliveryboy_multivendor/Helper/app_btn.dart';
 import 'package:deliveryboy_multivendor/Helper/color.dart';
 import 'package:deliveryboy_multivendor/Helper/constant.dart';
 import 'package:deliveryboy_multivendor/Helper/string.dart';
 import 'package:deliveryboy_multivendor/Model/order_model.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:http/http.dart';
-import 'package:url_launcher/url_launcher.dart';
-import '../livetracking.dart';
 import 'package:intl/intl.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class OrderDetail extends StatefulWidget {
   final Order_Model? model;
@@ -212,7 +210,7 @@ class StateOrder extends State<OrderDetail> with TickerProviderStateMixin {
                                                 "$ORDER_ID_LBL - ${model.id!}",
                                                 style: Theme.of(context)
                                                     .textTheme
-                                                    .subtitle2!
+                                                    .titleSmall!
                                                     .copyWith(
                                                         color: lightBlack2),
                                               ),
@@ -231,7 +229,7 @@ class StateOrder extends State<OrderDetail> with TickerProviderStateMixin {
                                                         model.dateTime!)),
                                                 style: Theme.of(context)
                                                     .textTheme
-                                                    .subtitle2!
+                                                    .titleSmall!
                                                     .copyWith(
                                                       color: lightBlack2,
                                                     ),
@@ -242,7 +240,7 @@ class StateOrder extends State<OrderDetail> with TickerProviderStateMixin {
                                             "$PAYMENT_MTHD - ${model.payMethod!}",
                                             style: Theme.of(context)
                                                 .textTheme
-                                                .subtitle2!
+                                                .titleSmall!
                                                 .copyWith(color: lightBlack2),
                                           ),
                                         ],
@@ -256,7 +254,7 @@ class StateOrder extends State<OrderDetail> with TickerProviderStateMixin {
                                           "$PREFER_DATE_TIME: ${model.delDate!} - ${model.delTime!}",
                                           style: Theme.of(context)
                                               .textTheme
-                                              .subtitle2!
+                                              .titleSmall!
                                               .copyWith(color: lightBlack2),
                                         ),
                                       ))
@@ -425,7 +423,7 @@ class StateOrder extends State<OrderDetail> with TickerProviderStateMixin {
                               OTP_LBL,
                               style: Theme.of(this.context)
                                   .textTheme
-                                  .subtitle1!
+                                  .titleMedium!
                                   .copyWith(color: fontColor),
                             )),
                         const Divider(color: lightBlack),
@@ -453,7 +451,7 @@ class StateOrder extends State<OrderDetail> with TickerProviderStateMixin {
                                         hintText: OTP_ENTER,
                                         hintStyle: Theme.of(this.context)
                                             .textTheme
-                                            .subtitle1!
+                                            .titleMedium!
                                             .copyWith(
                                                 color: lightBlack,
                                                 fontWeight: FontWeight.normal),
@@ -469,7 +467,7 @@ class StateOrder extends State<OrderDetail> with TickerProviderStateMixin {
                       CANCEL,
                       style: Theme.of(this.context)
                           .textTheme
-                          .subtitle2!
+                          .titleSmall!
                           .copyWith(
                               color: lightBlack, fontWeight: FontWeight.bold),
                     ),
@@ -481,7 +479,7 @@ class StateOrder extends State<OrderDetail> with TickerProviderStateMixin {
                       SEND_LBL,
                       style: Theme.of(this.context)
                           .textTheme
-                          .subtitle2!
+                          .titleSmall!
                           .copyWith(
                               color: fontColor, fontWeight: FontWeight.bold),
                     ),
@@ -529,7 +527,7 @@ class StateOrder extends State<OrderDetail> with TickerProviderStateMixin {
               Padding(
                   padding: const EdgeInsets.only(left: 15.0, right: 15.0),
                   child: Text(PRICE_DETAIL,
-                      style: Theme.of(context).textTheme.subtitle2!.copyWith(
+                      style: Theme.of(context).textTheme.titleSmall!.copyWith(
                           color: fontColor, fontWeight: FontWeight.bold))),
               const Divider(
                 color: lightBlack,
@@ -542,12 +540,12 @@ class StateOrder extends State<OrderDetail> with TickerProviderStateMixin {
                     Text("$PRICE_LBL :",
                         style: Theme.of(context)
                             .textTheme
-                            .button!
+                            .labelLarge!
                             .copyWith(color: lightBlack2)),
                     Text("${CUR_CURRENCY!} ${widget.model!.subTotal!}",
                         style: Theme.of(context)
                             .textTheme
-                            .button!
+                            .labelLarge!
                             .copyWith(color: lightBlack2))
                   ],
                 ),
@@ -560,12 +558,12 @@ class StateOrder extends State<OrderDetail> with TickerProviderStateMixin {
                     Text("$DELIVERY_CHARGE :",
                         style: Theme.of(context)
                             .textTheme
-                            .button!
+                            .labelLarge!
                             .copyWith(color: lightBlack2)),
                     Text("+ ${CUR_CURRENCY!} ${widget.model!.delCharge!}",
                         style: Theme.of(context)
                             .textTheme
-                            .button!
+                            .labelLarge!
                             .copyWith(color: lightBlack2))
                   ],
                 ),
@@ -578,12 +576,12 @@ class StateOrder extends State<OrderDetail> with TickerProviderStateMixin {
                     Text("$TAXPER :",
                         style: Theme.of(context)
                             .textTheme
-                            .button!
+                            .labelLarge!
                             .copyWith(color: lightBlack2)),
                     Text("+ ${CUR_CURRENCY!} ${widget.model!.taxAmt!}",
                         style: Theme.of(context)
                             .textTheme
-                            .button!
+                            .labelLarge!
                             .copyWith(color: lightBlack2))
                   ],
                 ),
@@ -596,12 +594,12 @@ class StateOrder extends State<OrderDetail> with TickerProviderStateMixin {
                     Text("$PROMO_CODE_DIS_LBL :",
                         style: Theme.of(context)
                             .textTheme
-                            .button!
+                            .labelLarge!
                             .copyWith(color: lightBlack2)),
                     Text("- ${CUR_CURRENCY!} ${widget.model!.promoDis!}",
                         style: Theme.of(context)
                             .textTheme
-                            .button!
+                            .labelLarge!
                             .copyWith(color: lightBlack2))
                   ],
                 ),
@@ -614,12 +612,12 @@ class StateOrder extends State<OrderDetail> with TickerProviderStateMixin {
                     Text("$WALLET_BAL :",
                         style: Theme.of(context)
                             .textTheme
-                            .button!
+                            .labelLarge!
                             .copyWith(color: lightBlack2)),
                     Text("- ${CUR_CURRENCY!} ${widget.model!.walBal!}",
                         style: Theme.of(context)
                             .textTheme
-                            .button!
+                            .labelLarge!
                             .copyWith(color: lightBlack2))
                   ],
                 ),
@@ -631,10 +629,10 @@ class StateOrder extends State<OrderDetail> with TickerProviderStateMixin {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text("$TOTAL_PRICE :",
-                        style: Theme.of(context).textTheme.button!.copyWith(
+                        style: Theme.of(context).textTheme.labelLarge!.copyWith(
                             color: lightBlack, fontWeight: FontWeight.bold)),
                     Text("${CUR_CURRENCY!} ${widget.model!.total!}",
-                        style: Theme.of(context).textTheme.button!.copyWith(
+                        style: Theme.of(context).textTheme.labelLarge!.copyWith(
                             color: lightBlack, fontWeight: FontWeight.bold))
                   ],
                 ),
@@ -656,7 +654,7 @@ class StateOrder extends State<OrderDetail> with TickerProviderStateMixin {
                       Text(SHIPPING_DETAIL,
                           style: Theme.of(context)
                               .textTheme
-                              .subtitle2!
+                              .titleSmall!
                               .copyWith(
                                   color: fontColor,
                                   fontWeight: FontWeight.bold)),
@@ -735,7 +733,7 @@ class StateOrder extends State<OrderDetail> with TickerProviderStateMixin {
                       Text(SELLER_DETAILS,
                           style: Theme.of(context)
                               .textTheme
-                              .subtitle2!
+                              .titleSmall!
                               .copyWith(
                                   color: fontColor,
                                   fontWeight: FontWeight.bold)),
@@ -889,7 +887,7 @@ class StateOrder extends State<OrderDetail> with TickerProviderStateMixin {
                               orderItem.name ?? '',
                               style: Theme.of(context)
                                   .textTheme
-                                  .subtitle1!
+                                  .titleMedium!
                                   .copyWith(
                                       color: lightBlack,
                                       fontWeight: FontWeight.normal),
@@ -910,7 +908,7 @@ class StateOrder extends State<OrderDetail> with TickerProviderStateMixin {
                                             overflow: TextOverflow.ellipsis,
                                             style: Theme.of(context)
                                                 .textTheme
-                                                .subtitle2!
+                                                .titleSmall!
                                                 .copyWith(color: lightBlack2),
                                           ),
                                         ),
@@ -921,7 +919,7 @@ class StateOrder extends State<OrderDetail> with TickerProviderStateMixin {
                                             val[index],
                                             style: Theme.of(context)
                                                 .textTheme
-                                                .subtitle2!
+                                                .titleSmall!
                                                 .copyWith(color: lightBlack),
                                           ),
                                         )
@@ -933,7 +931,7 @@ class StateOrder extends State<OrderDetail> with TickerProviderStateMixin {
                                 "$QUANTITY_LBL:",
                                 style: Theme.of(context)
                                     .textTheme
-                                    .subtitle2!
+                                    .titleSmall!
                                     .copyWith(color: lightBlack2),
                               ),
                               Padding(
@@ -942,7 +940,7 @@ class StateOrder extends State<OrderDetail> with TickerProviderStateMixin {
                                   orderItem.qty!,
                                   style: Theme.of(context)
                                       .textTheme
-                                      .subtitle2!
+                                      .titleSmall!
                                       .copyWith(color: lightBlack),
                                 ),
                               )
@@ -951,7 +949,7 @@ class StateOrder extends State<OrderDetail> with TickerProviderStateMixin {
                               "${CUR_CURRENCY!} ${orderItem.price!}",
                               style: Theme.of(context)
                                   .textTheme
-                                  .subtitle1!
+                                  .titleMedium!
                                   .copyWith(color: fontColor),
                             ),
                             widget.model!.itemList!.length >= 1
@@ -973,7 +971,7 @@ class StateOrder extends State<OrderDetail> with TickerProviderStateMixin {
                                                 "Update Status",
                                                 style: Theme.of(context)
                                                     .textTheme
-                                                    .subtitle2!
+                                                    .titleSmall!
                                                     .copyWith(
                                                         color: fontColor,
                                                         fontWeight:
@@ -1008,7 +1006,7 @@ class StateOrder extends State<OrderDetail> with TickerProviderStateMixin {
                                                     capitalize(st),
                                                     style: Theme.of(context)
                                                         .textTheme
-                                                        .subtitle2!
+                                                        .titleSmall!
                                                         .copyWith(
                                                             color: fontColor,
                                                             fontWeight:

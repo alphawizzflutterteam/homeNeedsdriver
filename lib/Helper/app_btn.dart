@@ -9,15 +9,13 @@ class AppBtn extends StatelessWidget {
   final Animation? btnAnim;
   final VoidCallback? onBtnSelected;
 
-
-  const AppBtn(
-      {Key? key,
-      this.title,
-      this.btnCntrl,
-      this.btnAnim,
-      this.onBtnSelected,
- })
-      : super(key: key);
+  const AppBtn({
+    Key? key,
+    this.title,
+    this.btnCntrl,
+    this.btnAnim,
+    this.onBtnSelected,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,12 +27,11 @@ class AppBtn extends StatelessWidget {
 
   Widget _buildBtnAnimation(BuildContext context, Widget? child) {
     return Padding(
-  padding: EdgeInsets.only(top: 25),
+      padding: EdgeInsets.only(top: 25),
       child: CupertinoButton(
         child: Container(
           width: btnAnim!.value,
           height: 45,
-        
           alignment: FractionalOffset.center,
           decoration: BoxDecoration(
             color: primary,
@@ -50,7 +47,7 @@ class AppBtn extends StatelessWidget {
                   textAlign: TextAlign.center,
                   style: Theme.of(context)
                       .textTheme
-                      .headline6!
+                      .titleLarge!
                       .copyWith(color: white, fontWeight: FontWeight.normal))
               : CircularProgressIndicator(
                   valueColor: AlwaysStoppedAnimation<Color>(white),

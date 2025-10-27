@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+
 import 'package:deliveryboy_multivendor/Helper/Session.dart';
 import 'package:deliveryboy_multivendor/Helper/app_btn.dart';
 import 'package:deliveryboy_multivendor/Helper/color.dart';
@@ -9,12 +10,10 @@ import 'package:deliveryboy_multivendor/Helper/string.dart';
 import 'package:deliveryboy_multivendor/Screens/home.dart';
 import 'package:deliveryboy_multivendor/Screens/privacy_policy.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:http/http.dart';
+
 import 'send_otp.dart';
 
 class Login extends StatefulWidget {
@@ -207,7 +206,7 @@ class _LoginPageState extends State<Login> with TickerProviderStateMixin {
           alignment: Alignment.topLeft,
           child: Text(
             SIGNIN_LBL,
-            style: Theme.of(context).textTheme.headline5!.copyWith(
+            style: Theme.of(context).textTheme.headlineSmall!.copyWith(
                   color: primary,
                   fontWeight: FontWeight.bold,
                 ),
@@ -225,7 +224,7 @@ class _LoginPageState extends State<Login> with TickerProviderStateMixin {
           Text(CONTINUE_AGREE_LBL,
               style: Theme.of(context)
                   .textTheme
-                  .caption!
+                  .bodySmall!
                   .copyWith(color: fontColor, fontWeight: FontWeight.normal)),
           const SizedBox(
             height: 3.0,
@@ -242,7 +241,7 @@ class _LoginPageState extends State<Login> with TickerProviderStateMixin {
                 },
                 child: Text(
                   TERMS_SERVICE_LBL,
-                  style: Theme.of(context).textTheme.caption!.copyWith(
+                  style: Theme.of(context).textTheme.bodySmall!.copyWith(
                       color: fontColor,
                       decoration: TextDecoration.underline,
                       fontWeight: FontWeight.normal),
@@ -253,7 +252,7 @@ class _LoginPageState extends State<Login> with TickerProviderStateMixin {
             Text(AND_LBL,
                 style: Theme.of(context)
                     .textTheme
-                    .caption!
+                    .bodySmall!
                     .copyWith(color: fontColor, fontWeight: FontWeight.normal)),
             const SizedBox(
               width: 5.0,
@@ -269,7 +268,7 @@ class _LoginPageState extends State<Login> with TickerProviderStateMixin {
                 },
                 child: Text(
                   PRIVACY_POLICY_LBL,
-                  style: Theme.of(context).textTheme.caption!.copyWith(
+                  style: Theme.of(context).textTheme.bodySmall!.copyWith(
                       color: fontColor,
                       decoration: TextDecoration.underline,
                       fontWeight: FontWeight.normal),
@@ -311,7 +310,7 @@ class _LoginPageState extends State<Login> with TickerProviderStateMixin {
           hintText: MOBILEHINT_LBL,
           hintStyle: Theme.of(context)
               .textTheme
-              .subtitle2!
+              .titleSmall!
               .copyWith(color: fontColor, fontWeight: FontWeight.normal),
           // filled: true,
           // fillColor: lightWhite,
@@ -408,7 +407,7 @@ class _LoginPageState extends State<Login> with TickerProviderStateMixin {
           hintText: PASSHINT_LBL,
           hintStyle: Theme.of(context)
               .textTheme
-              .subtitle2!
+              .titleSmall!
               .copyWith(color: fontColor, fontWeight: FontWeight.normal),
           contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
           prefixIconConstraints: BoxConstraints(minWidth: 40, maxHeight: 25),
@@ -445,7 +444,7 @@ class _LoginPageState extends State<Login> with TickerProviderStateMixin {
                             )));
               },
               child: Text(FORGOT_PASSWORD_LBL,
-                  style: Theme.of(context).textTheme.subtitle2!.copyWith(
+                  style: Theme.of(context).textTheme.titleSmall!.copyWith(
                         color: fontColor,
                         fontWeight: FontWeight.normal,
                       )),
