@@ -136,6 +136,7 @@ class _SendOtpState extends State<SendOtp> with TickerProviderStateMixin {
   Future<void> getVerifyUser() async {
     try {
       var data = {MOBILE: mobile, "forgot_otp": widget.checkOtp};
+      print('PrintData:_____${data}______');
       Response response =
           await post(getVerifyUserApi, body: data, headers: headers)
               .timeout(Duration(seconds: timeOut));
